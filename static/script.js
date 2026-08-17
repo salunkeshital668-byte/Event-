@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnRefresh = document.getElementById("btnRefresh");
 
   // Video & Stream Elements
+  const videoFrameContainer = document.getElementById("videoFrameContainer");
   const liveVideoFeed = document.getElementById("liveVideoFeed");
   const processedVideoPlayer = document.getElementById("processedVideoPlayer");
   const videoPlaceholder = document.getElementById("videoPlaceholder");
@@ -50,6 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const fpsBadge = document.getElementById("fpsBadge");
   const frameBadge = document.getElementById("frameBadge");
   const liveRecDot = document.getElementById("liveRecDot");
+
+  // Video Player Controls Elements (Play/Pause & Fullscreen)
+  const btnPlayPause = document.getElementById("btnPlayPause");
+  const iconPlay = document.getElementById("iconPlay");
+  const iconPause = document.getElementById("iconPause");
+  const labelPlayPause = document.getElementById("labelPlayPause");
+  const btnFullscreen = document.getElementById("btnFullscreen");
+  const iconFullscreen = document.getElementById("iconFullscreen");
+  const labelFullscreen = document.getElementById("labelFullscreen");
 
   // Live Detection Panel Elements
   const liveDetectionsContainer = document.getElementById("liveDetectionsContainer");
@@ -191,6 +201,14 @@ document.addEventListener("DOMContentLoaded", () => {
     btnStartDetection.classList.add("hidden");
     btnStopDetection.classList.remove("hidden");
 
+    // Update Player Control Button (Pause state)
+    if (iconPlay && iconPause) {
+      iconPlay.classList.add("hidden");
+      iconPause.classList.remove("hidden");
+    }
+    if (labelPlayPause) labelPlayPause.textContent = "Pause";
+    if (btnPlayPause) btnPlayPause.title = "Pause Video";
+
     streamStatusBadge.className = "status-badge";
     streamDot.className = "status-dot active";
     streamStatusText.textContent = "FEED: STREAMING";
@@ -230,13 +248,21 @@ document.addEventListener("DOMContentLoaded", () => {
     btnStartDetection.classList.remove("hidden");
     btnStopDetection.classList.add("hidden");
 
+    // Update Player Control Button (Play state)
+    if (iconPlay && iconPause) {
+      iconPlay.classList.remove("hidden");
+      iconPause.classList.add("hidden");
+    }
+    if (labelPlayPause) labelPlayPause.textContent = "Play";
+    if (btnPlayPause) btnPlayPause.title = "Play Video";
+
     streamDot.className = "status-dot";
     streamStatusText.textContent = "FEED: STOPPED";
 
     // Clear live detection cards
     liveDetectionsContainer.innerHTML = `
       <div class="empty-detections-state">
-        <span>Video detection stopped. Click "Start Video Detection" to resume.</span>
+        <span>Video detection stopped. Click "Start Video Detection" or Play to resume.</span>
       </div>
     `;
     liveDetectionsCountChip.textContent = "0 Active";
@@ -246,6 +272,76 @@ document.addEventListener("DOMContentLoaded", () => {
   btnStartDetection.addEventListener("click", startLiveStream);
   btnPlaceholderStart.addEventListener("click", startLiveStream);
   btnStopDetection.addEventListener("click", stopLiveStream);
+
+  // Play / Pause Button Listener
+  if (btnPlayPause) {
+    btnPlayPause.addEventListener("click", () => {
+      if (isStreaming) {
+        stopLiveStream();
+      } else {
+        startLiveStream();
+      }
+    });
+  }
+
+  // Full Screen Button & Browser Fullscreen API
+  function toggleFullscreen() {
+    const targetElem = videoFrameContainer || document.getElementById("videoFrameContainer");
+    if (!targetElem) return;
+
+    const isFull = !!(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    );
+
+    if (!isFull) {
+      if (targetElem.requestFullscreen) {
+        targetElem.requestFullscreen();
+      } else if (targetElem.webkitRequestFullscreen) {
+        targetElem.webkitRequestFullscreen();
+      } else if (targetElem.mozRequestFullScreen) {
+        targetElem.mozRequestFullScreen();
+      } else if (targetElem.msRequestFullscreen) {
+        targetElem.msRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+  }
+
+  if (btnFullscreen) {
+    btnFullscreen.addEventListener("click", toggleFullscreen);
+  }
+
+  function handleFullscreenChange() {
+    const isFull = !!(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    );
+    if (labelFullscreen) {
+      labelFullscreen.textContent = isFull ? "Exit Full Screen" : "Full Screen";
+    }
+    if (btnFullscreen) {
+      btnFullscreen.title = isFull ? "Exit Full Screen" : "Full Screen";
+    }
+  }
+
+  document.addEventListener("fullscreenchange", handleFullscreenChange);
+  document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+  document.addEventListener("mozfullscreenchange", handleFullscreenChange);
+  document.addEventListener("MSFullscreenChange", handleFullscreenChange);
 
   // -------------------------------------------------------------
   // 6. Fast Telemetry Polling (`/live-data`)

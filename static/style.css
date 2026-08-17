@@ -939,3 +939,78 @@ body.dark-theme {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Video Player Overlay Controls (Play/Pause & Fullscreen) */
+.video-player-controls {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 15;
+  background: rgba(13, 17, 26, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 0.35rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.25s ease;
+}
+
+.player-ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.player-ctrl-btn:hover {
+  background: rgba(0, 240, 255, 0.2);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+.player-ctrl-btn .player-icon {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.player-ctrl-btn .player-icon.hidden {
+  display: none;
+}
+
+/* Fullscreen Mode Styling */
+.video-display-frame:fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  aspect-ratio: auto !important;
+  border-radius: 0 !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #000 !important;
+}
+
+.video-display-frame:fullscreen .cctv-stream-element,
+.video-display-frame:fullscreen .cctv-video-element {
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: contain;
+}
+
+.video-display-frame:fullscreen .video-player-controls {
+  bottom: 24px;
+  right: 24px;
+}

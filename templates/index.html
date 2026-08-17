@@ -249,6 +249,19 @@
               Your browser does not support HTML5 video.
             </video>
 
+            <!-- Video Player Controls Bar (Play/Pause & Full Screen) -->
+            <div class="video-player-controls" id="videoPlayerControls">
+              <button class="player-ctrl-btn" id="btnPlayPause" title="Play Video" aria-label="Play / Pause Video">
+                <span class="player-icon" id="iconPlay">▶️</span>
+                <span class="player-icon hidden" id="iconPause">⏸️</span>
+                <span class="player-label" id="labelPlayPause">Play</span>
+              </button>
+              <button class="player-ctrl-btn" id="btnFullscreen" title="Full Screen" aria-label="Toggle Full Screen">
+                <span class="player-icon" id="iconFullscreen">⛶</span>
+                <span class="player-label" id="labelFullscreen">Full Screen</span>
+              </button>
+            </div>
+
             <!-- Video Placeholder when Stopped -->
             <div class="video-placeholder-overlay" id="videoPlaceholder">
               <div class="placeholder-icon">📹</div>
