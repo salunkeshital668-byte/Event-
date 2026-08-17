@@ -171,14 +171,8 @@ def process_video_pipeline(video_path: str, output_path: str) -> dict:
 def generate_live_video_stream(video_filename: str, conf_threshold: float = config.CONFIDENCE_THRESHOLD, loop: bool = True):
     """
     Frame-by-frame generator for live MJPEG video streaming with real-time YOLO object detection.
-    Supports both live IP Webcam camera streams (http://192.168.0.107:8080/video) and offline video files.
     Draws rectangular bounding boxes with class name + confidence % (e.g. 'car 91%', 'person 95%'),
     updates live detection telemetry, and yields multipart JPEG frames.
-
-    Performance optimizations for live feeds:
-    - Frame skipping: runs YOLO only every Nth frame (config.LIVE_DETECTION_INTERVAL)
-    - Smaller inference size: uses config.LIVE_IMGSZ (416) for faster detection
-    - Reduced display resolution: 640px width for faster JPEG encoding
     """
     global live_telemetry_state, active_stream_session_id
 
@@ -186,113 +180,66 @@ def generate_live_video_stream(video_filename: str, conf_threshold: float = conf
     session_id = time.time()
     active_stream_session_id = session_id
 
-    # Check if video_filename is an IP stream URL or keyword
-    is_url_stream = str(video_filename).startswith(("http://", "https://", "rtsp://")) or video_filename == "ip_webcam"
-    
-    if is_url_stream:
-        video_path = getattr(config, "IP_WEBCAM_URL", "http://192.168.0.107:8080/video") if video_filename == "ip_webcam" else video_filename
-        camera_id = "cam_ip_webcam"
-        stream_label = "IP Webcam (Phone Camera)"
+    # Resolve video path
+    if str(video_filename).startswith("http"):
+        video_path = video_filename
     else:
-        # Resolve local video path
         video_path = os.path.join(config.VIDEOS_DIR, video_filename)
         if not os.path.exists(video_path):
             video_path = config.VIDEO_PATH
-        camera_id = f"cam_{Path(video_filename).stem}"
-        stream_label = video_filename
+            if not os.path.exists(video_path):
+                print(f"[CityEye Stream Error] Video not found: {video_path}")
+                return
 
     det = get_detector()
     trk = MultiObjectTracker()
-    # Start with a clean event list — no stale events from previous runs
-    ev_det = EventDetector(det, trk, camera_id=camera_id, video_name=stream_label, start_clean=True)
+    camera_id = f"cam_{Path(video_filename).stem}" if not video_filename.startswith("http") else "cam_ip_webcam"
+    ev_det = EventDetector(det, trk, camera_id=camera_id)
 
-    # Open video capture with network optimizations if URL
-    if is_url_stream:
-        os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp|fflags;nobuffer|max_delay;500000"
-        cap = cv2.VideoCapture(video_path)
-    else:
-        cap = cv2.VideoCapture(video_path)
-
+    cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
-        print(f"[CityEye Stream Error] Cannot connect to source: {video_path}")
-        # Yield single placeholder error frame
-        err_frame = np.zeros((480, 640, 3), dtype=np.uint8)
-        cv2.putText(err_frame, "CANNOT CONNECT TO CAMERA", (60, 210), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
-        cv2.putText(err_frame, f"URL: {video_path}", (60, 250), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (200, 200, 200), 1)
-        cv2.putText(err_frame, "Please ensure phone and PC are on the same Wi-Fi.", (60, 280), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 240, 255), 1)
-        _, buf = cv2.imencode('.jpg', err_frame)
-        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + buf.tobytes() + b'\r\n')
-        return
+        print(f"[CityEye Stream Error] Cannot open video stream: {video_path}. Please check if the camera is online or the URL is correct.")
+        
+        # Fallback: some IP cameras require specific backend like cv2.CAP_FFMPEG
+        print(f"[CityEye Stream Error] Retrying with FFMPEG backend...")
+        cap = cv2.VideoCapture(video_path, cv2.CAP_FFMPEG)
+        if not cap.isOpened():
+            print(f"[CityEye Stream Error] Fallback failed. Unable to connect to MJPEG stream.")
+            return
 
-    total_frames = 0 if is_url_stream else (int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) or 1)
+    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) or 1
     fps = cap.get(cv2.CAP_PROP_FPS) or 25.0
     if fps <= 0 or np.isnan(fps):
         fps = 25.0
 
-    frame_delay = 0.001 if is_url_stream else (1.0 / max(1.0, min(fps, 30.0)))
-
-    # Live-mode detection interval: only run YOLO every Nth frame
-    detection_interval = config.LIVE_DETECTION_INTERVAL if is_url_stream else 1
-    live_imgsz = config.LIVE_IMGSZ if is_url_stream else 640
+    frame_delay = 1.0 / max(1.0, min(fps, 30.0))
 
     frame_no = 0
-    # Clear stale telemetry from previous sessions
     with live_stream_lock:
         live_telemetry_state["is_streaming"] = True
-        live_telemetry_state["video_file"] = stream_label
+        live_telemetry_state["video_file"] = video_filename
         live_telemetry_state["total_frames"] = total_frames
         live_telemetry_state["fps"] = round(fps, 1)
-        live_telemetry_state["recent_events"] = []
 
-    print(f"[CityEye Live Stream] Started stream for '{stream_label}' (Source: {video_path}, Conf: {conf_threshold}, DetInterval: {detection_interval}, ImgSz: {live_imgsz})")
+    print(f"[CityEye Live Stream] Started stream for '{video_filename}' ({total_frames} frames @ {fps:.1f} FPS, Conf: {conf_threshold})")
 
-    retry_count = 0
-    last_tracked = None  # Cache last tracked detections for frame-skipping
     try:
         while active_stream_session_id == session_id:
             loop_start = time.time()
             ret, frame = cap.read()
 
             if not ret or frame is None:
-                if is_url_stream:
-                    retry_count += 1
-                    time.sleep(0.05)
-                    if retry_count < 15:
-                        continue
-                    else:
-                        print(f"[CityEye Live Stream] Reconnecting to IP camera at {video_path}...")
-                        cap.release()
-                        time.sleep(0.3)
-                        cap = cv2.VideoCapture(video_path)
-                        retry_count = 0
-                        continue
-                elif loop:
+                if loop:
                     cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
                     frame_no = 0
                     continue
                 else:
                     break
 
-            retry_count = 0
             frame_no += 1
 
-            # Resize for display efficiency: 640px width for live camera, keeps aspect ratio
-            if is_url_stream and frame.shape[1] > 720:
-                scale = 640.0 / frame.shape[1]
-                frame = cv2.resize(frame, (640, int(frame.shape[0] * scale)), interpolation=cv2.INTER_LINEAR)
-
-            # Frame skipping: only run full YOLO + tracking on detection frames
-            run_detection = (frame_no % detection_interval == 0) or (last_tracked is None)
-
-            if run_detection:
-                # Full pipeline: YOLO detect -> ByteTrack -> Event analysis
-                detections = det.detect(frame, conf=conf_threshold, imgsz=live_imgsz)
-                tracked = trk.update(detections)
-                last_tracked = tracked
-                annotated_frame, alerts, new_events = ev_det.process_frame(frame, frame_no, fps, tracked_detections=tracked)
-            else:
-                # Reuse last tracked detections — just redraw overlay without re-running YOLO
-                annotated_frame, alerts, new_events = ev_det.process_frame(frame, frame_no, fps, tracked_detections=last_tracked)
+            # Process frame with YOLO and Event Detector
+            annotated_frame, alerts, new_events = ev_det.process_frame(frame, frame_no, fps)
 
             # Retrieve telemetry data compiled in process_frame
             telemetry = getattr(ev_det, "last_frame_telemetry", {})
@@ -314,10 +261,11 @@ def generate_live_video_stream(video_filename: str, conf_threshold: float = conf
                 live_telemetry_state["current_detections"] = telemetry.get("detections", [])
                 live_telemetry_state["active_alerts"] = alerts
                 if new_events:
+                    # Prepend new events (keep recent 50)
                     live_telemetry_state["recent_events"] = (new_events + live_telemetry_state["recent_events"])[:50]
 
-            # Encode annotated frame as JPEG (quality 85 for clear bounding boxes)
-            success, buffer = cv2.imencode('.jpg', annotated_frame, [cv2.IMWRITE_JPEG_QUALITY, 85])
+            # Encode annotated frame as JPEG
+            success, buffer = cv2.imencode('.jpg', annotated_frame, [cv2.IMWRITE_JPEG_QUALITY, 82])
             if not success:
                 continue
 
@@ -327,13 +275,10 @@ def generate_live_video_stream(video_filename: str, conf_threshold: float = conf
                 b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n'
             )
 
-            # Delay regulation
+            # Sleep slightly to match native video framerate
             elapsed = time.time() - loop_start
-            if not is_url_stream:
-                sleep_duration = max(0.005, frame_delay - elapsed)
-                time.sleep(sleep_duration)
-            else:
-                time.sleep(0.005)
+            sleep_duration = max(0.005, frame_delay - elapsed)
+            time.sleep(sleep_duration)
 
     except GeneratorExit:
         pass
@@ -344,32 +289,17 @@ def generate_live_video_stream(video_filename: str, conf_threshold: float = conf
         if active_stream_session_id == session_id:
             with live_stream_lock:
                 live_telemetry_state["is_streaming"] = False
-        print(f"[CityEye Live Stream] Stopped stream for '{stream_label}' at frame {frame_no}")
+        print(f"[CityEye Live Stream] Stopped stream for '{video_filename}' at frame {frame_no}")
 
 
 @app.get("/videos")
 def list_videos():
     """
-    Returns a list of all existing video clips from the project's 'videos' folder
-    along with the default IP Webcam live stream source.
+    Returns a list of all existing video clips from the project's 'videos' folder.
     """
     videos = []
+    supported_extensions = {".mp4", ".avi", ".mov", ".mkv"}
     
-    # 1. Add IP Webcam / Android Phone Camera as the Default Primary Source
-    ip_webcam_url = getattr(config, "IP_WEBCAM_URL", "http://192.168.0.107:8080/video")
-    if ip_webcam_url:
-        videos.append({
-            "filename": ip_webcam_url,
-            "display_name": "📱 Live IP Webcam",
-            "is_live_stream": True,
-            "size_mb": 0,
-            "frames": "Continuous Live",
-            "fps": 30.0,
-            "resolution": "Live HD",
-            "duration_sec": 0
-        })
-
-    supported_extensions = {".mp4", ".avi", ".mov", ".mkv", ".wmv", ".webm"}
     if os.path.exists(config.VIDEOS_DIR):
         for fname in sorted(os.listdir(config.VIDEOS_DIR)):
             ext = os.path.splitext(fname)[1].lower()
@@ -389,8 +319,7 @@ def list_videos():
 
                 videos.append({
                     "filename": fname,
-                    "display_name": f"📹 {fname} ({total_f} frames • {w}x{h})",
-                    "is_live_stream": False,
+                    "path": fpath,
                     "size_mb": size_mb,
                     "frames": total_f,
                     "fps": fps,
@@ -400,32 +329,29 @@ def list_videos():
 
     return {
         "count": len(videos),
-        "default_video": ip_webcam_url or (videos[0]["filename"] if videos else None),
+        "default_video": os.path.basename(config.VIDEO_PATH) if os.path.exists(config.VIDEO_PATH) else (videos[0]["filename"] if videos else None),
         "videos": videos
     }
 
 
 @app.get("/video-feed")
 def live_video_feed(
-    video: str = Query(None, description="Filename or URL of the video/camera stream"),
+    video: str = Query("input.mp4", description="Filename of the video clip in videos/"),
     conf: float = Query(config.CONFIDENCE_THRESHOLD, ge=0.1, le=0.95, description="YOLO Confidence threshold"),
     loop: bool = Query(True, description="Whether to loop the video stream")
 ):
     """
-    Live real-time streaming endpoint that processes IP Webcam or video frame-by-frame using YOLO.
+    Live real-time streaming endpoint that processes video frame-by-frame using YOLO.
     Draws clear rectangular bounding boxes with class name + confidence score near each box.
     """
-    if not video:
-        video = getattr(config, "IP_WEBCAM_URL", "http://192.168.0.107:8080/video")
-
-    is_url_stream = str(video).startswith(("http://", "https://", "rtsp://")) or video == "ip_webcam"
-    if not is_url_stream:
+    # Verify file exists, unless it's a remote URL
+    if not video.startswith("http"):
         target_path = os.path.join(config.VIDEOS_DIR, video)
         if not os.path.exists(target_path):
-            if os.path.exists(config.VIDEO_PATH):
+            if os.path.exists(config.VIDEO_PATH) and not str(config.VIDEO_PATH).startswith("http"):
                 video = os.path.basename(config.VIDEO_PATH)
             else:
-                video = getattr(config, "IP_WEBCAM_URL", "http://192.168.0.107:8080/video")
+                raise HTTPException(status_code=404, detail=f"Video file '{video}' not found in videos folder.")
 
     return StreamingResponse(
         generate_live_video_stream(video_filename=video, conf_threshold=conf, loop=loop),
@@ -626,3 +552,7 @@ def create_sample_video_endpoint():
         }
     except Exception as e:
         return JSONResponse(status_code=500, content={"status": "error", "message": str(e)})
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=False)

@@ -121,6 +121,12 @@ document.addEventListener("DOMContentLoaded", () => {
       availableVideos = data.videos || [];
       videoSelect.innerHTML = "";
 
+      // Add the Live IP Webcam option at the top
+      const webcamOpt = document.createElement("option");
+      webcamOpt.value = "http://192.168.0.107:8080/video";
+      webcamOpt.textContent = "📱 Live IP Webcam";
+      videoSelect.appendChild(webcamOpt);
+
       if (availableVideos.length === 0) {
         const opt = document.createElement("option");
         opt.value = "";
