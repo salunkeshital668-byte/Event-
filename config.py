@@ -27,10 +27,14 @@ def get_available_videos(videos_dir=VIDEOS_DIR):
     return vids
 
 
+# IP Webcam / Live Camera Configuration
+IP_WEBCAM_URL = os.getenv("IP_WEBCAM_URL", "http://192.168.0.107:8080/video")
+DEFAULT_CAMERA_SOURCE = IP_WEBCAM_URL
+
 ALL_VIDEOS = get_available_videos()
 IMAGE_PATH = str(IMAGES_DIR / "traffic.jpg")
 IMAGE_OUTPUT_PATH = str(OUTPUT_DIR / "detected_image.jpg")
-VIDEO_PATH = ALL_VIDEOS[0] if ALL_VIDEOS else str(VIDEOS_DIR / "input.mp4")
+VIDEO_PATH = IP_WEBCAM_URL if IP_WEBCAM_URL else (ALL_VIDEOS[0] if ALL_VIDEOS else str(VIDEOS_DIR / "input.mp4"))
 OUTPUT_PATH = str(OUTPUT_DIR / "processed_video.mp4")
 EVENTS_JSON_PATH = str(DATA_DIR / "events.json")
 
@@ -64,10 +68,10 @@ EXPECTED_DIRECTION = "RIGHT"
 MIN_MOVEMENT = 15.0
 
 # Number of consecutive frames a vehicle must be stationary to trigger stopped/accident alert
-STOPPED_FRAMES = 30
+STOPPED_FRAMES = 90
 
 # Maximum speed (pixels/frame) below which a vehicle is considered stationary
-STOPPED_SPEED_THRESHOLD = 2.0
+STOPPED_SPEED_THRESHOLD = 1.5
 
 # Number of consecutive frames 3+ persons must be on the same bike
 TRIPLE_RIDING_FRAMES = 5
@@ -76,7 +80,28 @@ TRIPLE_RIDING_FRAMES = 5
 PERSON_MOTORCYCLE_DISTANCE = 80
 
 # Cooldown frames to prevent spamming duplicate events for the same track
-EVENT_COOLDOWN = 60
+EVENT_COOLDOWN = 150
 
 # History length for trajectory analysis
 TRAJECTORY_HISTORY = 30
+
+# --- Collision / Accident Detection ---
+# Minimum IoU between two vehicle bounding boxes to consider a collision
+COLLISION_IOU_THRESHOLD = 0.15
+
+# Maximum center-to-center pixel distance for collision proximity
+COLLISION_DISTANCE_THRESHOLD = 20.0
+
+# Consecutive frames two vehicles must overlap to fire a collision event
+COLLISION_CONSECUTIVE_FRAMES = 8
+
+# --- Wrong-Way Detection ---
+# Consecutive frames a vehicle must travel in the wrong direction
+WRONG_WAY_CONSECUTIVE_FRAMES = 8
+
+# --- Live Stream Performance ---
+# Run YOLO detection only every Nth frame in live mode (reuse last detections otherwise)
+LIVE_DETECTION_INTERVAL = 3
+
+# YOLO inference image size for live stream (smaller = faster)
+LIVE_IMGSZ = 416

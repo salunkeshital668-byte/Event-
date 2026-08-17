@@ -215,13 +215,28 @@ def run_video_pipeline(video_paths: list = None, conf: float = 0.35):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CityEye — AI Traffic CCTV Event Detection System (Multi-Video Runner)"
+        description="CityEye — AI Traffic CCTV Event Detection System (Multi-Video & Live Camera Runner)"
     )
     parser.add_argument(
         "--mode",
-        choices=["all", "dual", "both", "image", "video"],
+        choices=["all", "dual", "both", "image", "video", "camera"],
         default="all",
-        help="Processing mode: 'all'/'dual' (process all videos in videos/), 'image', or 'video'"
+        help="Processing mode: 'all'/'dual' (process all videos in videos/), 'image', 'video', or 'camera'"
+    )
+    parser.add_argument(
+        "--camera",
+        action="store_true",
+        help=f"Stream from live IP Webcam / phone camera (default: {config.IP_WEBCAM_URL})"
+    )
+    parser.add_argument(
+        "--source",
+        default=None,
+        help="Custom stream URL or camera index (e.g. http://192.168.0.107:8080/video or 0)"
+    )
+    parser.add_argument(
+        "--ip-webcam",
+        action="store_true",
+        help=f"Connect to Android Phone IP Webcam at {config.IP_WEBCAM_URL}"
     )
     parser.add_argument(
         "--video",
@@ -252,7 +267,14 @@ def main():
 
     args = parser.parse_args()
 
-    if args.mode == "image":
+    if args.camera or args.ip_webcam or args.mode == "camera" or (args.source and str(args.source).startswith("http")):
+        stream_src = args.source or config.IP_WEBCAM_URL
+        print(f"\n[CityEye CLI] Starting Live Phone Camera / IP Webcam Detection: {stream_src}")
+        detector = YOLODetector(conf=args.conf)
+        tracker = MultiObjectTracker()
+        ev_det = EventDetector(detector=detector, tracker=tracker, camera_id="cam_ip_webcam", video_name="IP_Webcam_Live")
+        ev_det.process_live_stream(stream_source=stream_src, conf=args.conf, show=True)
+    elif args.mode == "image":
         print("Running Single Image Detection...")
         detector = YOLODetector(conf=args.conf)
         tracker = MultiObjectTracker()

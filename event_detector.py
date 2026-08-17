@@ -19,7 +19,7 @@ class EventDetector:
     5. Helmet Violation (Modular AI Model)
     """
 
-    def __init__(self, detector, tracker, camera_id: str = config.CAMERA_ID, video_name: str = "input.mp4"):
+    def __init__(self, detector, tracker, camera_id: str = config.CAMERA_ID, video_name: str = "input.mp4", start_clean: bool = False):
         self.detector = detector
         self.tracker = tracker
         self.camera_id = camera_id
@@ -27,7 +27,8 @@ class EventDetector:
 
         # Events log
         self.events = []
-        self.load_existing_events()
+        if not start_clean:
+            self.load_existing_events()
 
         # Consecutive frame counters for stability
         # track_id -> consecutive frames with 3+ persons
@@ -287,7 +288,7 @@ class EventDetector:
 
             if is_wrong_way:
                 self.wrong_way_consecutive[track_id] += 1
-                if self.wrong_way_consecutive[track_id] >= 4:
+                if self.wrong_way_consecutive[track_id] >= config.WRONG_WAY_CONSECUTIVE_FRAMES:
                     status_tags.append("WRONG WAY")
                     ev = self.log_event(
                         event_type="wrong_way_driving",
@@ -356,10 +357,10 @@ class EventDetector:
                 iou = self._calculate_iou(box1, box2)
 
                 pair_key = tuple(sorted([t1, t2]))
-                # Check collision condition (physical bounding box overlap or close collision proximity)
-                if iou >= 0.03 or dist < 35.0:
+                # Check collision condition using configurable thresholds
+                if iou >= config.COLLISION_IOU_THRESHOLD or dist < config.COLLISION_DISTANCE_THRESHOLD:
                     self.collision_consecutive[pair_key] += 1
-                    if self.collision_consecutive[pair_key] >= 4:
+                    if self.collision_consecutive[pair_key] >= config.COLLISION_CONSECUTIVE_FRAMES:
                         for tid in (t1, t2):
                             if tid in vehicle_status:
                                 if "ACCIDENT / COLLISION" not in vehicle_status[tid]["tags"]:
@@ -544,6 +545,91 @@ class EventDetector:
             cv2.putText(out_frame, f">> {latest_alert}", (w - 550, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.48, (0, 0, 255), 2, cv2.LINE_AA)
 
         return out_frame
+
+    def process_live_stream(self, stream_source: str = None, output_path: str = None, conf: float = 0.35, show: bool = True, max_frames: int = None) -> dict:
+        """
+        Connects to a live IP Webcam (or video stream), reads frames continuously,
+        runs real-time YOLO object detection, tracking, and safety event analytics,
+        and optionally displays the annotated live stream in an OpenCV desktop window.
+        """
+        source = stream_source or getattr(config, "IP_WEBCAM_URL", "http://192.168.0.107:8080/video")
+        is_url = str(source).startswith(("http://", "https://", "rtsp://"))
+        if is_url:
+            os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp|fflags;nobuffer|max_delay;500000"
+
+        cap = cv2.VideoCapture(source)
+        if not cap.isOpened():
+            print(f"[CityEye Live Stream Error] Could not connect to camera at: {source}")
+            return {"status": "error", "message": f"Cannot connect to stream: {source}", "events": []}
+
+        fps = cap.get(cv2.CAP_PROP_FPS) or 25.0
+        if fps <= 0 or np.isnan(fps):
+            fps = 25.0
+
+        writer = None
+        if output_path:
+            w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)) or 640
+            h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)) or 480
+            fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+            writer = cv2.VideoWriter(output_path, fourcc, fps, (w, h))
+
+        print(f"\n[CityEye Camera] Connected to live feed: {source}")
+        print("Press 'q' or ESC in the video window to stop live detection.\n")
+
+        frame_no = 0
+        start_time = time.time()
+        retry_count = 0
+
+        try:
+            while True:
+                ret, frame = cap.read()
+                if not ret or frame is None:
+                    if is_url:
+                        retry_count += 1
+                        time.sleep(0.05)
+                        if retry_count < 20:
+                            continue
+                        else:
+                            print(f"[CityEye Camera] Reconnecting to {source}...")
+                            cap.release()
+                            time.sleep(0.5)
+                            cap = cv2.VideoCapture(source)
+                            retry_count = 0
+                            continue
+                    else:
+                        break
+
+                retry_count = 0
+                frame_no += 1
+
+                annotated_frame, alerts, new_events = self.process_frame(frame, frame_no, fps)
+
+                if writer:
+                    writer.write(annotated_frame)
+
+                if show:
+                    cv2.imshow("CityEye — Live IP Webcam YOLO Stream (Press Q to quit)", annotated_frame)
+                    key = cv2.waitKey(1) & 0xFF
+                    if key == ord('q') or key == 27:
+                        print("\n[CityEye Camera] Live stream stopped by user.")
+                        break
+
+                if max_frames and frame_no >= max_frames:
+                    break
+
+        finally:
+            cap.release()
+            if writer:
+                writer.release()
+            if show:
+                cv2.destroyAllWindows()
+
+        elapsed = round(time.time() - start_time, 2)
+        summary = self.get_summary_statistics()
+        summary["elapsed_seconds"] = elapsed
+        summary["total_frames"] = frame_no
+        summary["source"] = str(source)
+        return summary
 
     def process_image(self, image_path: str = config.IMAGE_PATH, output_path: str = config.IMAGE_OUTPUT_PATH) -> dict:
         """

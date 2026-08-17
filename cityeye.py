@@ -1,4 +1,4 @@
-﻿from pathlib import Path
+from pathlib import Path
 import json
 import subprocess
 import sys
@@ -122,6 +122,20 @@ def json_results():
     except ValueError:
         print("Please enter a number.")
 
+def live_camera():
+    import config
+    from detector import YOLODetector
+    from tracker import MultiObjectTracker
+    from event_detector import EventDetector
+
+    url = getattr(config, "IP_WEBCAM_URL", "http://192.168.0.107:8080/video")
+    print(f"\nConnecting to Phone IP Webcam at {url} ...")
+    det = YOLODetector()
+    trk = MultiObjectTracker()
+    ev = EventDetector(det, trk, camera_id="cam_ip_webcam", video_name="Phone_Camera")
+    ev.process_live_stream(stream_source=url, show=True)
+
+
 def main():
 
     while True:
@@ -136,7 +150,8 @@ def main():
         print("2. Open Final Video")
         print("3. Event Clips")
         print("4. JSON Results")
-        print("5. Exit")
+        print("5. Live Phone IP Webcam")
+        print("6. Exit")
 
         choice = input("\nSelect option: ").strip()
 
@@ -153,11 +168,15 @@ def main():
             json_results()
 
         elif choice == "5":
+            live_camera()
+
+        elif choice == "6":
             print("\nExiting CityEye...")
             break
 
         else:
             print("\nInvalid option.")
+
 
 if __name__ == "__main__":
     main()

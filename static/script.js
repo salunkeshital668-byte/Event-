@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
       availableVideos.forEach(v => {
         const opt = document.createElement("option");
         opt.value = v.filename;
-        opt.textContent = `${v.filename} (${v.frames} frames • ${v.resolution})`;
+        opt.textContent = v.display_name || `${v.filename} (${v.frames} frames • ${v.resolution})`;
         videoSelect.appendChild(opt);
       });
 
@@ -151,8 +151,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const selected = videoSelect.value;
     const v = availableVideos.find(item => item.filename === selected);
     if (v) {
-      videoResolutionBadge.textContent = v.resolution || "720P HD";
-      cameraNameText.textContent = `CAM: ${v.filename.split('.')[0].toUpperCase()}`;
+      videoResolutionBadge.textContent = v.resolution || (v.is_live_stream ? "LIVE HD" : "720P HD");
+      if (v.is_live_stream || selected.startsWith("http")) {
+        cameraNameText.textContent = "CAM: PHONE_IP_WEBCAM (LIVE)";
+      } else {
+        cameraNameText.textContent = `CAM: ${v.filename.split('.')[0].toUpperCase()}`;
+      }
     }
   }
 
@@ -183,6 +187,16 @@ document.addEventListener("DOMContentLoaded", () => {
       showAlert("No Video Selected", "Please select an MP4 video from the dropdown.", "warning");
       return;
     }
+
+    // Clear stale events from previous sessions — only show events from this live stream
+    allEvents = [];
+    seenEventKeys = new Set();
+    renderEventsTable();
+    statTriple.textContent = "0";
+    statWrongWay.textContent = "0";
+    statStopped.textContent = "0";
+    statHelmet.textContent = "0";
+    eventTotalBadge.textContent = "0 Events";
 
     const conf = (parseInt(confSlider.value, 10) / 100).toFixed(2);
     const isLoop = loopToggle.checked;
