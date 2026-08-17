@@ -160,10 +160,12 @@ def run(source, output_path, show=False):
 
 
 if __name__ == "__main__":
+    import os
+    default_src = "videos/accident.mp4" if os.path.exists("videos/accident.mp4") else "videos/input.mp4"
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source", required=True)
-    parser.add_argument("--output", default="accident_out.mp4")
+    parser.add_argument("--source", default=default_src, help=f"Video source path (default: {default_src})")
+    parser.add_argument("--output", default="output/accident_out.mp4")
     parser.add_argument("--show", action="store_true")
     args = parser.parse_args()
-    src = int(args.source) if args.source.isdigit() else args.source
+    src = int(args.source) if str(args.source).isdigit() else args.source
     run(src, args.output, show=args.show)

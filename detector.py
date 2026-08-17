@@ -4,20 +4,31 @@ import numpy as np
 import supervision as sv
 from ultralytics import YOLO
 
+try:
+    import torch
+    if torch.cuda.is_available():
+        DEFAULT_DEVICE = "cuda"
+    else:
+        DEFAULT_DEVICE = "cpu"
+        torch.set_num_threads(max(1, min(8, os.cpu_count() or 4)))
+except Exception:
+    DEFAULT_DEVICE = "cpu"
+
 import config
 
 
 class YOLODetector:
     """
-    Ultralytics YOLO wrapper for CPU-compatible traffic object detection.
+    Ultralytics YOLO wrapper for high-performance traffic object detection.
     Detects persons, cars, motorcycles, buses, and trucks.
     Integrates a dedicated Helmet-trained YOLO model for helmet / no-helmet detection.
     """
 
-    def __init__(self, model_path: str = config.MODEL_PATH, conf: float = config.CONFIDENCE_THRESHOLD):
+    def __init__(self, model_path: str = config.MODEL_PATH, conf: float = config.CONFIDENCE_THRESHOLD, device: str = DEFAULT_DEVICE):
         self.model_path = model_path
         self.conf = conf
-        print(f"[YOLODetector] Loading Base YOLO model from '{self.model_path}'...")
+        self.device = device
+        print(f"[YOLODetector] Loading Base YOLO model from '{self.model_path}' on device '{self.device}'...")
         try:
             self.model = YOLO(self.model_path)
             self.class_names = self.model.names
@@ -64,15 +75,22 @@ class YOLODetector:
             print(f"[YOLODetector]   To enable real helmet detection, place your trained YOLO model at: models/helmet_model.pt")
             print(f"[YOLODetector]   (Helmet detection disabled gracefully without faking)")
 
-    def detect(self, frame: np.ndarray) -> sv.Detections:
+    def detect(self, frame: np.ndarray, conf: float = None, imgsz: int = 640) -> sv.Detections:
         """
         Runs object detection on a single frame and returns filtered sv.Detections.
         """
         if frame is None:
             return sv.Detections.empty()
 
-        # Run Ultralytics inference (verbose=False for clean logs)
-        results = self.model(frame, conf=self.conf, verbose=False)[0]
+        c = conf if conf is not None else self.conf
+        # Run Ultralytics inference with device optimization and imgsz
+        results = self.model.predict(
+            frame,
+            conf=c,
+            imgsz=imgsz,
+            device=self.device,
+            verbose=False
+        )[0]
 
         # Convert to supervision Detections
         detections = sv.Detections.from_ultralytics(results)

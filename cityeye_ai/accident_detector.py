@@ -11,12 +11,12 @@ from ultralytics import YOLO
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-VIDEO_PATH = BASE_DIR / "videos" / "input.mp4"
+VIDEO_PATH = (BASE_DIR / "videos" / "accident.mp4") if (BASE_DIR / "videos" / "accident.mp4").exists() else (BASE_DIR / "videos" / "input.mp4")
 DATA_DIR = BASE_DIR / "data"
 
 DATA_DIR.mkdir(exist_ok=True)
 
-MODEL_PATH = str(BASE_DIR / "yolo11n.pt")
+MODEL_PATH = str(BASE_DIR / "yolov8n.pt") if (BASE_DIR / "yolov8n.pt").exists() else str(BASE_DIR / "yolo11n.pt")
 
 
 # ============================================================

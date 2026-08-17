@@ -1,28 +1,20 @@
 """
 CityEye — AI Traffic & CCTV Event Detection System
 ==================================================
-Python-only CLI runner supporting BOTH Image and MP4 Video inputs.
-
-- Image Mode:
-    * Loads 'images/traffic.jpg'
-    * YOLO object detection (Person & Motorcycle)
-    * Single-image triple-riding detection (no tracking needed)
-    * Draws bounding boxes, labels, and confidence scores
-    * Saves annotated image to 'output/detected_image.jpg'
-    * Handles missing image gracefully with clear message
-
-- Video Mode:
-    * Loads 'videos/traffic.mp4'
-    * ByteTrack multi-object tracking
-    * Wrong-way driving & vehicle-stopped/accident detection (video only)
-    * Triple-riding detection (both image & video)
-    * Saves annotated video to 'output/processed_video.mp4'
-    * Saves event log to 'data/events.json'
-    * Handles missing video gracefully with clear message
+Multi-Video and Dual-Video CLI runner:
+- Automatically discovers ALL video files in the "videos/" folder (.mp4, .avi, .mov, .mkv, etc.)
+- Sequentially processes Video 1 (Regular/Traffic) and Video 2 (Accident/Collision)
+- Runs full YOLO object detection + ByteTrack tracking + Safety Event analytics
+- Video 1: Helmet AI (models/helmet_best.pt), Triple-Riding, Wrong-Way, Stopped vehicle
+- Video 2: Collision/Accident detection, Road hazard stoppage, Overlap physics
+- Saves individual output videos in output/ and separate event logs in data/
+- Allows manual single-video or multi-video selection
 """
 
 import os
 import sys
+import glob
+import json
 import argparse
 from pathlib import Path
 
@@ -32,170 +24,252 @@ from tracker import MultiObjectTracker
 from event_detector import EventDetector
 
 
-def run_cityeye(
-    mode: str = "both",
-    image_path: str = config.IMAGE_PATH,
-    video_path: str = config.VIDEO_PATH,
-    image_output_path: str = config.IMAGE_OUTPUT_PATH,
-    video_output_path: str = config.OUTPUT_PATH
-):
-    print("=" * 60)
-    print("        CITYEYE AI TRAFFIC & CCTV ANALYTICS        ")
-    print("=" * 60)
+def find_all_videos(videos_dir: str = config.VIDEOS_DIR) -> list:
+    """
+    Scans the videos directory and returns all supported video files.
+    Supports .mp4, .avi, .mov, .mkv, .wmv, .webm.
+    """
+    if not os.path.exists(videos_dir):
+        return []
 
-    # Ensure output and data directories exist
+    supported_exts = getattr(config, "SUPPORTED_VIDEO_EXTENSIONS", {".mp4", ".avi", ".mov", ".mkv", ".wmv", ".webm"})
+    found_videos = []
+
+    for fname in sorted(os.listdir(videos_dir)):
+        ext = os.path.splitext(fname)[1].lower()
+        if ext in supported_exts:
+            full_path = os.path.join(videos_dir, fname)
+            found_videos.append(full_path)
+
+    # Sort prioritizing standard pairs: input.mp4 first, accident.mp4 second
+    def sort_key(path):
+        name = os.path.basename(path).lower()
+        if "input" in name:
+            return (0, name)
+        elif "traffic" in name:
+            return (1, name)
+        elif "accident" in name or "crash" in name:
+            return (2, name)
+        return (3, name)
+
+    found_videos.sort(key=sort_key)
+    return found_videos
+
+
+def process_single_video(
+    video_path: str,
+    output_path: str,
+    detector: YOLODetector,
+    camera_id: str = None,
+    conf: float = 0.35,
+    imgsz: int = 640
+) -> tuple:
+    """
+    Processes a single video file with a fresh tracker state and returns metrics & events.
+    """
+    tracker = MultiObjectTracker()
+    vname = os.path.basename(video_path)
+    cam_id = camera_id or f"cam_{os.path.splitext(vname)[0]}"
+
+    event_detector = EventDetector(
+        detector=detector,
+        tracker=tracker,
+        camera_id=cam_id,
+        video_name=vname
+    )
+
+    result = event_detector.process_video(
+        video_path=video_path,
+        output_path=output_path,
+        conf=conf,
+        imgsz=imgsz
+    )
+
+    return result, event_detector
+
+
+def run_video_pipeline(video_paths: list = None, conf: float = 0.35):
+    """
+    Main execution pipeline: Processes all provided or auto-detected videos,
+    saves separate event logs for each video, saves combined events,
+    and outputs the required terminal summary.
+    """
+    print("=" * 65)
+    print("        CITYEYE AI TRAFFIC & CCTV DETECTION SYSTEM        ")
+    print("=" * 65)
+
     os.makedirs(config.OUTPUT_DIR, exist_ok=True)
     os.makedirs(config.DATA_DIR, exist_ok=True)
-    os.makedirs(config.IMAGES_DIR, exist_ok=True)
-    os.makedirs(config.VIDEOS_DIR, exist_ok=True)
-    os.makedirs(config.MODELS_DIR, exist_ok=True)
 
-    # Initialize YOLO detector and tracker
-    detector = YOLODetector()
-    tracker = MultiObjectTracker()
-    event_detector = EventDetector(detector=detector, tracker=tracker, camera_id=config.CAMERA_ID)
+    # 1. Discover all videos if not explicitly provided
+    if not video_paths:
+        video_paths = find_all_videos(config.VIDEOS_DIR)
 
-    # Report Helmet Model Status
-    print("-" * 60)
+    if not video_paths:
+        print(f"\n[CityEye Error] No supported video files found in '{config.VIDEOS_DIR}'.")
+        print(f"  Supported formats: {config.SUPPORTED_VIDEO_EXTENSIONS}")
+        return []
+
+    print(f"\n[CityEye Discovery] Found {len(video_paths)} video(s) for processing:")
+    for idx, vp in enumerate(video_paths, 1):
+        print(f"  • Video {idx}: {os.path.basename(vp)} ({vp})")
+
+    # 2. Shared detector instance (reuses loaded YOLO and Helmet weights in memory)
+    detector = YOLODetector(conf=conf)
+
+    print("-" * 65)
     if detector.helmet_model_available:
-        print(f"• Helmet AI Status:   [ACTIVE / LOADED]")
-        print(f"  Model Path:         {config.HELMET_MODEL_PATH}")
-        print(f"  Classes Detected:   {detector.helmet_class_names}")
+        print(f"• Helmet AI Status:   [ACTIVE / LOADED] ({config.HELMET_MODEL_PATH})")
     else:
-        print(f"• Helmet AI Status:   [NOT CONFIGURED / NOT FOUND]")
-        print(f"  Expected Path:      {config.HELMET_MODEL_PATH}")
-        print(f"  Note: To enable real helmet detection, place your model at: models/helmet_model.pt")
-    print("-" * 60)
+        print(f"• Helmet AI Status:   [NOT CONFIGURED]")
+    print("-" * 65)
 
-    image_results = None
-    video_results = None
+    all_results = []
+    all_combined_events = []
 
-    # =========================================================================
-    # 1. IMAGE DETECTION (Tested first as specified)
-    # =========================================================================
-    if mode in ("both", "image"):
-        print("\n" + "-" * 60)
-        print(" [1/2] RUNNING IMAGE DETECTION")
-        print("-" * 60)
+    # 3. Process each video sequentially
+    for idx, vpath in enumerate(video_paths, 1):
+        vname = os.path.basename(vpath)
+        vstem = os.path.splitext(vname)[0]
+        vout = os.path.join(config.OUTPUT_DIR, f"{vstem}_detected.mp4")
 
-        if not os.path.exists(image_path):
-            print(f"[CityEye Image] Notice: Image file '{image_path}' was not found.")
-            print(f"                Place an image at '{image_path}' to run image detection.")
-            image_results = {
-                "status": "skipped",
-                "message": f"Image file '{image_path}' not found."
-            }
+        print("\n" + "=" * 65)
+        print(f" [{idx}/{len(video_paths)}] PROCESSING VIDEO {idx}: {vname}")
+        print("=" * 65)
+
+        # Optimize resolution based on video type
+        img_res = 480 if "input" in vname.lower() else 640
+
+        v_res, v_ev_det = process_single_video(
+            video_path=vpath,
+            output_path=vout,
+            detector=detector,
+            conf=conf,
+            imgsz=img_res
+        )
+
+        all_results.append(v_res)
+        run_events = v_res.get("events", [])
+        all_combined_events.extend(run_events)
+
+        # Save individual Video events JSON
+        vid_json_filename = f"video_{idx}_events.json"
+        vid_json_path = os.path.join(config.DATA_DIR, vid_json_filename)
+        with open(vid_json_path, "w", encoding="utf-8") as f:
+            json.dump({
+                "video_name": vname,
+                "video_id": vname,
+                "total_detections": v_res.get("total_detections", 0),
+                "total_events": v_res.get("total_events", 0),
+                "events": run_events
+            }, f, indent=2)
+        print(f"[CityEye] Video {idx} ({vname}) events saved to: {vid_json_path}")
+
+        # Also save with filename-based JSON for direct reference (e.g. data/accident_events.json)
+        named_json_path = os.path.join(config.DATA_DIR, f"{vstem}_events.json")
+        with open(named_json_path, "w", encoding="utf-8") as f:
+            json.dump({
+                "video_name": vname,
+                "video_id": vname,
+                "total_detections": v_res.get("total_detections", 0),
+                "total_events": v_res.get("total_events", 0),
+                "events": run_events
+            }, f, indent=2)
+
+    # 4. Save combined events
+    combined_path = config.EVENTS_JSON_PATH
+    with open(combined_path, "w", encoding="utf-8") as f:
+        json.dump({"events": all_combined_events}, f, indent=2)
+    print(f"\n[CityEye] Combined events ({len(all_combined_events)} total) saved to: {combined_path}")
+
+    # 5. Required Terminal Summary
+    print("\n" + "=" * 65)
+    print("                    TERMINAL SUMMARY                       ")
+    print("=" * 65)
+
+    for idx, res in enumerate(all_results, 1):
+        vname = res.get("video_name", f"Video {idx}")
+        print(f"\nVideo {idx} ({vname}):")
+        print(f"- Total detections: {res.get('total_detections', 0)}")
+        print(f"- Total events:     {res.get('total_events', 0)}")
+        
+        # If accident video, show Accident events
+        if "accident" in vname.lower() or "crash" in vname.lower():
+            print(f"- Accident events:  {res.get('accident_events', 0)}")
         else:
-            image_results = event_detector.process_image(
-                image_path=image_path,
-                output_path=image_output_path
-            )
+            print(f"- NO HELMET events: {res.get('no_helmet_events', 0)}")
+            
+        print(f"- Other events:     {res.get('other_events', 0)}")
 
-    # =========================================================================
-    # 2. VIDEO DETECTION (Tested second if videos/traffic.mp4 exists)
-    # =========================================================================
-    if mode in ("both", "video"):
-        print("\n" + "-" * 60)
-        print(" [2/2] RUNNING VIDEO DETECTION")
-        print("-" * 60)
+    print("\n" + "=" * 65)
+    print("OUTPUT FILES CREATED:")
+    for idx, res in enumerate(all_results, 1):
+        vname = res.get("video_name", f"video_{idx}")
+        print(f"  • Video {idx} Output:  {res.get('output_path')}")
+        print(f"  • Video {idx} Events:  data/video_{idx}_events.json (and data/{os.path.splitext(vname)[0]}_events.json)")
+    print(f"  • Combined Events: {combined_path}")
+    print("=" * 65 + "\n")
 
-        if not os.path.exists(video_path):
-            print(f"[CityEye Video] Notice: Video file '{video_path}' was not found.")
-            print(f"                Place an MP4 video at '{video_path}' to run video detection.")
-            video_results = {
-                "status": "skipped",
-                "message": f"Video file '{video_path}' not found."
-            }
-        else:
-            video_results = event_detector.process_video(
-                video_path=video_path,
-                output_path=video_output_path
-            )
-
-    # =========================================================================
-    # FINAL SUMMARY
-    # =========================================================================
-    print("\n" + "=" * 60)
-    print("                   PROCESSING SUMMARY                      ")
-    print("=" * 60)
-
-    if image_results:
-        print(f"• Image Analysis: [{image_results.get('status', 'unknown').upper()}]")
-        if image_results.get("status") == "success":
-            print(f"    - Persons Detected:     {image_results.get('persons_detected', 0)}")
-            print(f"    - Motorcycles Detected: {image_results.get('motorcycles_detected', 0)}")
-            print(f"    - Triple Riding Events: {image_results.get('triple_riding_count', 0)}")
-            print(f"    - Annotated Image:      {image_results.get('output_path')}")
-        else:
-            print(f"    - Reason: {image_results.get('message')}")
-
-    if video_results:
-        print(f"• Video Analysis: [{video_results.get('status', 'unknown').upper()}]")
-        if video_results.get("status") == "success":
-            print(f"    - Frames Processed:     {video_results.get('total_frames_processed', 0)}")
-            print(f"    - Elapsed Time:         {video_results.get('elapsed_seconds', 0)}s")
-            print(f"    - Total Events Logged:  {video_results.get('events_count', 0)}")
-            print(f"    - Annotated Video:      {video_results.get('output_path')}")
-        else:
-            print(f"    - Reason: {video_results.get('message')}")
-
-    print("=" * 60 + "\n")
-    return image_results, video_results
+    return all_results
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CityEye — AI Traffic CCTV Event Detection System (Image & MP4 Video)"
+        description="CityEye — AI Traffic CCTV Event Detection System (Multi-Video Runner)"
     )
     parser.add_argument(
         "--mode",
-        choices=["both", "image", "video"],
-        default=None,
-        help="Processing mode: 'both' (default), 'image', or 'video'"
-    )
-    parser.add_argument(
-        "--image",
-        default=None,
-        help=f"Path to input image (default: {config.IMAGE_PATH})"
+        choices=["all", "dual", "both", "image", "video"],
+        default="all",
+        help="Processing mode: 'all'/'dual' (process all videos in videos/), 'image', or 'video'"
     )
     parser.add_argument(
         "--video",
         default=None,
-        help=f"Path to input MP4 video (default: {config.VIDEO_PATH})"
+        help="Path to a specific video to process (e.g. videos/accident.mp4 or videos/input.mp4)"
     )
     parser.add_argument(
-        "--output-image",
-        default=config.IMAGE_OUTPUT_PATH,
-        help=f"Path for output detected image (default: {config.IMAGE_OUTPUT_PATH})"
+        "--video1",
+        default=None,
+        help="Path to Video 1 (e.g. videos/input.mp4)"
     )
     parser.add_argument(
-        "--output-video",
-        default=config.OUTPUT_PATH,
-        help=f"Path for output processed video (default: {config.OUTPUT_PATH})"
+        "--video2",
+        default=None,
+        help="Path to Video 2 (e.g. videos/accident.mp4)"
+    )
+    parser.add_argument(
+        "--conf",
+        type=float,
+        default=0.35,
+        help="YOLO confidence threshold (default: 0.35)"
+    )
+    parser.add_argument(
+        "--image",
+        default=None,
+        help=f"Path to input image for single-image mode (default: {config.IMAGE_PATH})"
     )
 
     args = parser.parse_args()
 
-    # Determine mode based on explicit arguments
-    if args.mode:
-        mode = args.mode
-    elif args.image and not args.video:
-        mode = "image"
-    elif args.video and not args.image:
-        mode = "video"
+    if args.mode == "image":
+        print("Running Single Image Detection...")
+        detector = YOLODetector(conf=args.conf)
+        tracker = MultiObjectTracker()
+        ev_det = EventDetector(detector, tracker)
+        img_p = args.image or config.IMAGE_PATH
+        ev_det.process_image(img_p, config.IMAGE_OUTPUT_PATH)
+    elif args.video:
+        # Process a specific chosen video
+        run_video_pipeline(video_paths=[args.video], conf=args.conf)
+    elif args.video1 or args.video2:
+        v_list = []
+        if args.video1: v_list.append(args.video1)
+        if args.video2: v_list.append(args.video2)
+        run_video_pipeline(video_paths=v_list, conf=args.conf)
     else:
-        mode = "both"
-
-    image_path = args.image if args.image else config.IMAGE_PATH
-    video_path = args.video if args.video else config.VIDEO_PATH
-
-    run_cityeye(
-        mode=mode,
-        image_path=image_path,
-        video_path=video_path,
-        image_output_path=args.output_image,
-        video_output_path=args.output_video
-    )
+        # Auto-detect and process all videos in videos/ folder
+        run_video_pipeline(conf=args.conf)
 
 
 if __name__ == "__main__":

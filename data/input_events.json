@@ -1,0 +1,4613 @@
+{
+  "video_name": "input.mp4",
+  "video_id": "input.mp4",
+  "total_detections": 8668,
+  "total_events": 201,
+  "events": [
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:01",
+      "frame_no": 1,
+      "relative_time_sec": 0.04,
+      "detected_object": "vehicle #3",
+      "vehicle_id": 3,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:01",
+      "frame_no": 1,
+      "relative_time_sec": 0.04,
+      "detected_object": "vehicle #7",
+      "vehicle_id": 7,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:02",
+      "frame_no": 7,
+      "relative_time_sec": 0.28,
+      "detected_object": "vehicle #3",
+      "vehicle_id": 3,
+      "confidence": 0.5,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:02",
+      "frame_no": 12,
+      "relative_time_sec": 0.48,
+      "detected_object": "vehicle #1",
+      "vehicle_id": 1,
+      "confidence": 0.47,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:02",
+      "frame_no": 13,
+      "relative_time_sec": 0.52,
+      "detected_object": "vehicle #6",
+      "vehicle_id": 6,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:02",
+      "frame_no": 19,
+      "relative_time_sec": 0.76,
+      "detected_object": "vehicle #3",
+      "vehicle_id": 3,
+      "confidence": 0.41,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:02",
+      "frame_no": 19,
+      "relative_time_sec": 0.76,
+      "detected_object": "vehicle #6",
+      "vehicle_id": 6,
+      "confidence": 0.4,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:02",
+      "frame_no": 19,
+      "relative_time_sec": 0.76,
+      "detected_object": "truck #13 & car #1",
+      "vehicle_id": 13,
+      "confidence": 0.63,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 13
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 1
+        },
+        "iou": 0.987,
+        "distance": 0.8,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 13
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 1
+      },
+      "iou": 0.987,
+      "distance": 0.8,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:03",
+      "frame_no": 20,
+      "relative_time_sec": 0.8,
+      "detected_object": "motorcycle #3 & motorcycle #6",
+      "vehicle_id": 3,
+      "confidence": 0.41,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 3
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 6
+        },
+        "iou": 0.093,
+        "distance": 120.0,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 3
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 6
+      },
+      "iou": 0.093,
+      "distance": 120.0,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:03",
+      "frame_no": 30,
+      "relative_time_sec": 1.2,
+      "detected_object": "vehicle #15",
+      "vehicle_id": 15,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:03",
+      "frame_no": 36,
+      "relative_time_sec": 1.44,
+      "detected_object": "truck #1 & car #14",
+      "vehicle_id": 1,
+      "confidence": 0.62,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 1
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 14
+        },
+        "iou": 0.986,
+        "distance": 0.7,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 1
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 14
+      },
+      "iou": 0.986,
+      "distance": 0.7,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:03",
+      "frame_no": 46,
+      "relative_time_sec": 1.84,
+      "detected_object": "vehicle #22",
+      "vehicle_id": 22,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:04",
+      "frame_no": 49,
+      "relative_time_sec": 1.96,
+      "detected_object": "motorcycle #22 & bus #21",
+      "vehicle_id": 22,
+      "confidence": 0.58,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 22
+        },
+        "vehicle_2": {
+          "class": "bus",
+          "track_id": 21
+        },
+        "iou": 0.106,
+        "distance": 115.6,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 22
+      },
+      "vehicle_2": {
+        "class": "bus",
+        "track_id": 21
+      },
+      "iou": 0.106,
+      "distance": 115.6,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:04",
+      "frame_no": 51,
+      "relative_time_sec": 2.04,
+      "detected_object": "bus #21 & motorcycle #22",
+      "vehicle_id": 21,
+      "confidence": 0.52,
+      "details": {
+        "vehicle_1": {
+          "class": "bus",
+          "track_id": 21
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 22
+        },
+        "iou": 0.102,
+        "distance": 118.0,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "bus",
+        "track_id": 21
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 22
+      },
+      "iou": 0.102,
+      "distance": 118.0,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:04",
+      "frame_no": 52,
+      "relative_time_sec": 2.08,
+      "detected_object": "vehicle #21",
+      "vehicle_id": 21,
+      "confidence": 0.52,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:04",
+      "frame_no": 52,
+      "relative_time_sec": 2.08,
+      "detected_object": "vehicle #22",
+      "vehicle_id": 22,
+      "confidence": 0.38,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:04",
+      "frame_no": 53,
+      "relative_time_sec": 2.12,
+      "detected_object": "truck #14 & car #1",
+      "vehicle_id": 14,
+      "confidence": 0.49,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 14
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 1
+        },
+        "iou": 0.988,
+        "distance": 0.7,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 14
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 1
+      },
+      "iou": 0.988,
+      "distance": 0.7,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:04",
+      "frame_no": 54,
+      "relative_time_sec": 2.16,
+      "detected_object": "vehicle #22",
+      "vehicle_id": 22,
+      "confidence": 0.5,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:05",
+      "frame_no": 62,
+      "relative_time_sec": 2.48,
+      "detected_object": "vehicle #26",
+      "vehicle_id": 26,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:05",
+      "frame_no": 66,
+      "relative_time_sec": 2.64,
+      "detected_object": "vehicle #23",
+      "vehicle_id": 23,
+      "confidence": 0.55,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:06",
+      "frame_no": 76,
+      "relative_time_sec": 3.04,
+      "detected_object": "bus #6 & motorcycle #22",
+      "vehicle_id": 6,
+      "confidence": 0.51,
+      "details": {
+        "vehicle_1": {
+          "class": "bus",
+          "track_id": 6
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 22
+        },
+        "iou": 0.047,
+        "distance": 137.7,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "bus",
+        "track_id": 6
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 22
+      },
+      "iou": 0.047,
+      "distance": 137.7,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:06",
+      "frame_no": 80,
+      "relative_time_sec": 3.2,
+      "detected_object": "vehicle #6",
+      "vehicle_id": 6,
+      "confidence": 0.52,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:08",
+      "frame_no": 106,
+      "relative_time_sec": 4.24,
+      "detected_object": "vehicle #22",
+      "vehicle_id": 22,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:09",
+      "frame_no": 112,
+      "relative_time_sec": 4.48,
+      "detected_object": "vehicle #22",
+      "vehicle_id": 22,
+      "confidence": 0.64,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:09",
+      "frame_no": 113,
+      "relative_time_sec": 4.52,
+      "detected_object": "vehicle #14",
+      "vehicle_id": 14,
+      "confidence": 0.36,
+      "details": {
+        "stopped_duration_sec": 1.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 1.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:09",
+      "frame_no": 114,
+      "relative_time_sec": 4.56,
+      "detected_object": "vehicle #22",
+      "vehicle_id": 22,
+      "confidence": 0.67,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:10",
+      "frame_no": 126,
+      "relative_time_sec": 5.04,
+      "detected_object": "vehicle #23",
+      "vehicle_id": 23,
+      "confidence": 0.75,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:10",
+      "frame_no": 132,
+      "relative_time_sec": 5.28,
+      "detected_object": "truck #23 & truck #6",
+      "vehicle_id": 23,
+      "confidence": 0.57,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 23
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 6
+        },
+        "iou": 0.089,
+        "distance": 151.6,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 23
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 6
+      },
+      "iou": 0.089,
+      "distance": 151.6,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:11",
+      "frame_no": 136,
+      "relative_time_sec": 5.44,
+      "detected_object": "truck #6 & truck #23",
+      "vehicle_id": 6,
+      "confidence": 0.78,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 6
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 23
+        },
+        "iou": 0.092,
+        "distance": 148.8,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 6
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 23
+      },
+      "iou": 0.092,
+      "distance": 148.8,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:11",
+      "frame_no": 140,
+      "relative_time_sec": 5.6,
+      "detected_object": "vehicle #42",
+      "vehicle_id": 42,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:11",
+      "frame_no": 143,
+      "relative_time_sec": 5.72,
+      "detected_object": "truck #39 & truck #45",
+      "vehicle_id": 39,
+      "confidence": 0.73,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 39
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 45
+        },
+        "iou": 0.196,
+        "distance": 90.9,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 39
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 45
+      },
+      "iou": 0.196,
+      "distance": 90.9,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:11",
+      "frame_no": 144,
+      "relative_time_sec": 5.76,
+      "detected_object": "vehicle #51",
+      "vehicle_id": 51,
+      "confidence": 0.62,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:12",
+      "frame_no": 155,
+      "relative_time_sec": 6.2,
+      "detected_object": "car #45 & truck #39",
+      "vehicle_id": 45,
+      "confidence": 0.55,
+      "details": {
+        "vehicle_1": {
+          "class": "car",
+          "track_id": 45
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 39
+        },
+        "iou": 0.185,
+        "distance": 92.5,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "car",
+        "track_id": 45
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 39
+      },
+      "iou": 0.185,
+      "distance": 92.5,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:12",
+      "frame_no": 156,
+      "relative_time_sec": 6.24,
+      "detected_object": "vehicle #39",
+      "vehicle_id": 39,
+      "confidence": 0.52,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:12",
+      "frame_no": 160,
+      "relative_time_sec": 6.4,
+      "detected_object": "vehicle #42",
+      "vehicle_id": 42,
+      "confidence": 0.68,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:13",
+      "frame_no": 167,
+      "relative_time_sec": 6.68,
+      "detected_object": "truck #52 & car #45",
+      "vehicle_id": 52,
+      "confidence": 0.49,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 52
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 45
+        },
+        "iou": 0.985,
+        "distance": 1.0,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 52
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 45
+      },
+      "iou": 0.985,
+      "distance": 1.0,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:13",
+      "frame_no": 170,
+      "relative_time_sec": 6.8,
+      "detected_object": "truck #50 & motorcycle #42",
+      "vehicle_id": 50,
+      "confidence": 0.56,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 50
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 42
+        },
+        "iou": 0.041,
+        "distance": 101.3,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 50
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 42
+      },
+      "iou": 0.041,
+      "distance": 101.3,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:14",
+      "frame_no": 177,
+      "relative_time_sec": 7.08,
+      "detected_object": "truck #55 & car #50",
+      "vehicle_id": 55,
+      "confidence": 0.36,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 55
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 50
+        },
+        "iou": 0.983,
+        "distance": 0.8,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 55
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 50
+      },
+      "iou": 0.983,
+      "distance": 0.8,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:14",
+      "frame_no": 178,
+      "relative_time_sec": 7.12,
+      "detected_object": "vehicle #42",
+      "vehicle_id": 42,
+      "confidence": 0.4,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:14",
+      "frame_no": 178,
+      "relative_time_sec": 7.12,
+      "detected_object": "vehicle #51",
+      "vehicle_id": 51,
+      "confidence": 0.35,
+      "details": {
+        "stopped_duration_sec": 1.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 1.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:14",
+      "frame_no": 179,
+      "relative_time_sec": 7.16,
+      "detected_object": "motorcycle #42 & car #50",
+      "vehicle_id": 42,
+      "confidence": 0.5,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 42
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 50
+        },
+        "iou": 0.05,
+        "distance": 96.5,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 42
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 50
+      },
+      "iou": 0.05,
+      "distance": 96.5,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:15",
+      "frame_no": 190,
+      "relative_time_sec": 7.6,
+      "detected_object": "vehicle #52",
+      "vehicle_id": 52,
+      "confidence": 0.51,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:15",
+      "frame_no": 192,
+      "relative_time_sec": 7.68,
+      "detected_object": "vehicle #50",
+      "vehicle_id": 50,
+      "confidence": 0.43,
+      "details": {
+        "stopped_duration_sec": 1.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 1.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:15",
+      "frame_no": 194,
+      "relative_time_sec": 7.76,
+      "detected_object": "vehicle #59",
+      "vehicle_id": 59,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:16",
+      "frame_no": 200,
+      "relative_time_sec": 8.0,
+      "detected_object": "vehicle #42",
+      "vehicle_id": 42,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:16",
+      "frame_no": 204,
+      "relative_time_sec": 8.16,
+      "detected_object": "vehicle #51",
+      "vehicle_id": 51,
+      "confidence": 0.72,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:17",
+      "frame_no": 211,
+      "relative_time_sec": 8.44,
+      "detected_object": "truck #39 & truck #45",
+      "vehicle_id": 39,
+      "confidence": 0.61,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 39
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 45
+        },
+        "iou": 0.092,
+        "distance": 124.5,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 39
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 45
+      },
+      "iou": 0.092,
+      "distance": 124.5,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:17",
+      "frame_no": 215,
+      "relative_time_sec": 8.6,
+      "detected_object": "truck #45 & car #52",
+      "vehicle_id": 45,
+      "confidence": 0.43,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 45
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 52
+        },
+        "iou": 0.979,
+        "distance": 1.2,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 45
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 52
+      },
+      "iou": 0.979,
+      "distance": 1.2,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:17",
+      "frame_no": 216,
+      "relative_time_sec": 8.64,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.5,
+      "details": {
+        "stopped_duration_sec": 1.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 1.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:17",
+      "frame_no": 216,
+      "relative_time_sec": 8.64,
+      "detected_object": "vehicle #39",
+      "vehicle_id": 39,
+      "confidence": 0.41,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:18",
+      "frame_no": 225,
+      "relative_time_sec": 9.0,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.8,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:18",
+      "frame_no": 228,
+      "relative_time_sec": 9.12,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.61,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:18",
+      "frame_no": 231,
+      "relative_time_sec": 9.24,
+      "detected_object": "truck #52 & truck #39",
+      "vehicle_id": 52,
+      "confidence": 0.73,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 52
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 39
+        },
+        "iou": 0.08,
+        "distance": 121.2,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 52
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 39
+      },
+      "iou": 0.08,
+      "distance": 121.2,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:19",
+      "frame_no": 238,
+      "relative_time_sec": 9.52,
+      "detected_object": "vehicle #51",
+      "vehicle_id": 51,
+      "confidence": 0.37,
+      "details": {
+        "stopped_duration_sec": 3.4,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 3.4,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:19",
+      "frame_no": 238,
+      "relative_time_sec": 9.52,
+      "detected_object": "truck #50 & car #66",
+      "vehicle_id": 50,
+      "confidence": 0.38,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 50
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 66
+        },
+        "iou": 0.983,
+        "distance": 0.5,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 50
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 66
+      },
+      "iou": 0.983,
+      "distance": 0.5,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:19",
+      "frame_no": 242,
+      "relative_time_sec": 9.68,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.73,
+      "details": {
+        "stopped_duration_sec": 1.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 1.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:19",
+      "frame_no": 246,
+      "relative_time_sec": 9.84,
+      "detected_object": "vehicle #39",
+      "vehicle_id": 39,
+      "confidence": 0.4,
+      "details": {
+        "stopped_duration_sec": 1.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 1.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:20",
+      "frame_no": 253,
+      "relative_time_sec": 10.12,
+      "detected_object": "vehicle #50",
+      "vehicle_id": 50,
+      "confidence": 0.45,
+      "details": {
+        "stopped_duration_sec": 3.0,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 3.0,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:21",
+      "frame_no": 275,
+      "relative_time_sec": 11.0,
+      "detected_object": "vehicle #58",
+      "vehicle_id": 58,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:21",
+      "frame_no": 275,
+      "relative_time_sec": 11.0,
+      "detected_object": "truck #45 & bus #39",
+      "vehicle_id": 45,
+      "confidence": 0.78,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 45
+        },
+        "vehicle_2": {
+          "class": "bus",
+          "track_id": 39
+        },
+        "iou": 0.085,
+        "distance": 105.1,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 45
+      },
+      "vehicle_2": {
+        "class": "bus",
+        "track_id": 39
+      },
+      "iou": 0.085,
+      "distance": 105.1,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:21",
+      "frame_no": 276,
+      "relative_time_sec": 11.04,
+      "detected_object": "vehicle #39",
+      "vehicle_id": 39,
+      "confidence": 0.65,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:21",
+      "frame_no": 279,
+      "relative_time_sec": 11.16,
+      "detected_object": "vehicle #58",
+      "vehicle_id": 58,
+      "confidence": 0.52,
+      "details": {
+        "stopped_duration_sec": 1.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 1.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:21",
+      "frame_no": 279,
+      "relative_time_sec": 11.16,
+      "detected_object": "bus #39 & truck #45",
+      "vehicle_id": 39,
+      "confidence": 0.59,
+      "details": {
+        "vehicle_1": {
+          "class": "bus",
+          "track_id": 39
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 45
+        },
+        "iou": 0.09,
+        "distance": 103.1,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "bus",
+        "track_id": 39
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 45
+      },
+      "iou": 0.09,
+      "distance": 103.1,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:21",
+      "frame_no": 285,
+      "relative_time_sec": 11.4,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.62,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:21",
+      "frame_no": 288,
+      "relative_time_sec": 11.52,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.92,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:22",
+      "frame_no": 294,
+      "relative_time_sec": 11.76,
+      "detected_object": "vehicle #75",
+      "vehicle_id": 75,
+      "confidence": 0.7,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:22",
+      "frame_no": 300,
+      "relative_time_sec": 12.0,
+      "detected_object": "car #61 & car #75",
+      "vehicle_id": 61,
+      "confidence": 0.91,
+      "details": {
+        "vehicle_1": {
+          "class": "car",
+          "track_id": 61
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 75
+        },
+        "iou": 0.068,
+        "distance": 122.6,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "car",
+        "track_id": 61
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 75
+      },
+      "iou": 0.068,
+      "distance": 122.6,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:22",
+      "frame_no": 302,
+      "relative_time_sec": 12.08,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.91,
+      "details": {
+        "stopped_duration_sec": 2.5,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 2.5,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:22",
+      "frame_no": 306,
+      "relative_time_sec": 12.24,
+      "detected_object": "vehicle #39",
+      "vehicle_id": 39,
+      "confidence": 0.42,
+      "details": {
+        "stopped_duration_sec": 2.6,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 2.6,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:23",
+      "frame_no": 311,
+      "relative_time_sec": 12.44,
+      "detected_object": "truck #78 & truck #45",
+      "vehicle_id": 78,
+      "confidence": 0.55,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 78
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 45
+        },
+        "iou": 0.101,
+        "distance": 101.9,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 78
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 45
+      },
+      "iou": 0.101,
+      "distance": 101.9,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:23",
+      "frame_no": 313,
+      "relative_time_sec": 12.52,
+      "detected_object": "vehicle #50",
+      "vehicle_id": 50,
+      "confidence": 0.35,
+      "details": {
+        "stopped_duration_sec": 4.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 4.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:23",
+      "frame_no": 314,
+      "relative_time_sec": 12.56,
+      "detected_object": "car #75 & truck #45",
+      "vehicle_id": 75,
+      "confidence": 0.48,
+      "details": {
+        "vehicle_1": {
+          "class": "car",
+          "track_id": 75
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 45
+        },
+        "iou": 0.039,
+        "distance": 120.0,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "car",
+        "track_id": 75
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 45
+      },
+      "iou": 0.039,
+      "distance": 120.0,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:23",
+      "frame_no": 321,
+      "relative_time_sec": 12.84,
+      "detected_object": "bus #82 & truck #45",
+      "vehicle_id": 82,
+      "confidence": 0.61,
+      "details": {
+        "vehicle_1": {
+          "class": "bus",
+          "track_id": 82
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 45
+        },
+        "iou": 0.117,
+        "distance": 90.2,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "bus",
+        "track_id": 82
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 45
+      },
+      "iou": 0.117,
+      "distance": 90.2,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:24",
+      "frame_no": 328,
+      "relative_time_sec": 13.12,
+      "detected_object": "vehicle #85",
+      "vehicle_id": 85,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:24",
+      "frame_no": 336,
+      "relative_time_sec": 13.44,
+      "detected_object": "vehicle #39",
+      "vehicle_id": 39,
+      "confidence": 0.65,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:24",
+      "frame_no": 338,
+      "relative_time_sec": 13.52,
+      "detected_object": "truck #86 & truck #84",
+      "vehicle_id": 86,
+      "confidence": 0.55,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 86
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 84
+        },
+        "iou": 0.045,
+        "distance": 134.6,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 86
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 84
+      },
+      "iou": 0.045,
+      "distance": 134.6,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:24",
+      "frame_no": 339,
+      "relative_time_sec": 13.56,
+      "detected_object": "bus #39 & truck #86",
+      "vehicle_id": 39,
+      "confidence": 0.6,
+      "details": {
+        "vehicle_1": {
+          "class": "bus",
+          "track_id": 39
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 86
+        },
+        "iou": 0.046,
+        "distance": 133.6,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "bus",
+        "track_id": 39
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 86
+      },
+      "iou": 0.046,
+      "distance": 133.6,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:24",
+      "frame_no": 340,
+      "relative_time_sec": 13.6,
+      "detected_object": "vehicle #84",
+      "vehicle_id": 84,
+      "confidence": 0.36,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:25",
+      "frame_no": 350,
+      "relative_time_sec": 14.0,
+      "detected_object": "vehicle #86",
+      "vehicle_id": 86,
+      "confidence": 0.7,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:25",
+      "frame_no": 353,
+      "relative_time_sec": 14.12,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.91,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:25",
+      "frame_no": 360,
+      "relative_time_sec": 14.4,
+      "detected_object": "car #61 & car #86",
+      "vehicle_id": 61,
+      "confidence": 0.93,
+      "details": {
+        "vehicle_1": {
+          "class": "car",
+          "track_id": 61
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 86
+        },
+        "iou": 0.083,
+        "distance": 150.8,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "car",
+        "track_id": 61
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 86
+      },
+      "iou": 0.083,
+      "distance": 150.8,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:25",
+      "frame_no": 362,
+      "relative_time_sec": 14.48,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.92,
+      "details": {
+        "stopped_duration_sec": 2.8,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 2.8,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:25",
+      "frame_no": 363,
+      "relative_time_sec": 14.52,
+      "detected_object": "vehicle #58",
+      "vehicle_id": 58,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:25",
+      "frame_no": 364,
+      "relative_time_sec": 14.56,
+      "detected_object": "vehicle #58",
+      "vehicle_id": 58,
+      "confidence": 0.37,
+      "details": {
+        "stopped_duration_sec": 3.3,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 3.3,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:25",
+      "frame_no": 366,
+      "relative_time_sec": 14.64,
+      "detected_object": "vehicle #39",
+      "vehicle_id": 39,
+      "confidence": 0.5,
+      "details": {
+        "stopped_duration_sec": 4.6,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 4.6,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:26",
+      "frame_no": 373,
+      "relative_time_sec": 14.92,
+      "detected_object": "vehicle #58",
+      "vehicle_id": 58,
+      "confidence": 0.43,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:26",
+      "frame_no": 374,
+      "relative_time_sec": 14.96,
+      "detected_object": "vehicle #50",
+      "vehicle_id": 50,
+      "confidence": 0.36,
+      "details": {
+        "stopped_duration_sec": 5.9,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 5.9,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:26",
+      "frame_no": 378,
+      "relative_time_sec": 15.12,
+      "detected_object": "bus #45 & truck #86",
+      "vehicle_id": 45,
+      "confidence": 0.49,
+      "details": {
+        "vehicle_1": {
+          "class": "bus",
+          "track_id": 45
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 86
+        },
+        "iou": 0.994,
+        "distance": 0.5,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "bus",
+        "track_id": 45
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 86
+      },
+      "iou": 0.994,
+      "distance": 0.5,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:26",
+      "frame_no": 379,
+      "relative_time_sec": 15.16,
+      "detected_object": "vehicle #89",
+      "vehicle_id": 89,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:26",
+      "frame_no": 382,
+      "relative_time_sec": 15.28,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.52,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:27",
+      "frame_no": 383,
+      "relative_time_sec": 15.32,
+      "detected_object": "vehicle #89",
+      "vehicle_id": 89,
+      "confidence": 0.46,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:28",
+      "frame_no": 396,
+      "relative_time_sec": 15.84,
+      "detected_object": "vehicle #39",
+      "vehicle_id": 39,
+      "confidence": 0.65,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:29",
+      "frame_no": 408,
+      "relative_time_sec": 16.32,
+      "detected_object": "vehicle #95",
+      "vehicle_id": 95,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:30",
+      "frame_no": 415,
+      "relative_time_sec": 16.6,
+      "detected_object": "vehicle #89",
+      "vehicle_id": 89,
+      "confidence": 0.48,
+      "details": {
+        "stopped_duration_sec": 1.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 1.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:31",
+      "frame_no": 420,
+      "relative_time_sec": 16.8,
+      "detected_object": "vehicle #98",
+      "vehicle_id": 98,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:31",
+      "frame_no": 420,
+      "relative_time_sec": 16.8,
+      "detected_object": "car #61 & truck #45",
+      "vehicle_id": 61,
+      "confidence": 0.92,
+      "details": {
+        "vehicle_1": {
+          "class": "car",
+          "track_id": 61
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 45
+        },
+        "iou": 0.07,
+        "distance": 155.1,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "car",
+        "track_id": 61
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 45
+      },
+      "iou": 0.07,
+      "distance": 155.1,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:31",
+      "frame_no": 422,
+      "relative_time_sec": 16.88,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.88,
+      "details": {
+        "stopped_duration_sec": 4.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 4.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:31",
+      "frame_no": 423,
+      "relative_time_sec": 16.92,
+      "detected_object": "vehicle #58",
+      "vehicle_id": 58,
+      "confidence": 0.68,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:31",
+      "frame_no": 423,
+      "relative_time_sec": 16.92,
+      "detected_object": "truck #50 & bus #39",
+      "vehicle_id": 50,
+      "confidence": 0.41,
+      "details": {
+        "vehicle_1": {
+          "class": "truck",
+          "track_id": 50
+        },
+        "vehicle_2": {
+          "class": "bus",
+          "track_id": 39
+        },
+        "iou": 0.072,
+        "distance": 62.5,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "truck",
+        "track_id": 50
+      },
+      "vehicle_2": {
+        "class": "bus",
+        "track_id": 39
+      },
+      "iou": 0.072,
+      "distance": 62.5,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:31",
+      "frame_no": 424,
+      "relative_time_sec": 16.96,
+      "detected_object": "vehicle #58",
+      "vehicle_id": 58,
+      "confidence": 0.49,
+      "details": {
+        "stopped_duration_sec": 4.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 4.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:31",
+      "frame_no": 426,
+      "relative_time_sec": 17.04,
+      "detected_object": "vehicle #39",
+      "vehicle_id": 39,
+      "confidence": 0.43,
+      "details": {
+        "stopped_duration_sec": 5.8,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 5.8,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:32",
+      "frame_no": 429,
+      "relative_time_sec": 17.16,
+      "detected_object": "vehicle #96",
+      "vehicle_id": 96,
+      "confidence": 0.55,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:32",
+      "frame_no": 430,
+      "relative_time_sec": 17.2,
+      "detected_object": "vehicle #100",
+      "vehicle_id": 100,
+      "confidence": 0.4,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:32",
+      "frame_no": 430,
+      "relative_time_sec": 17.2,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.46,
+      "details": {
+        "stopped_duration_sec": 1.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 1.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:32",
+      "frame_no": 434,
+      "relative_time_sec": 17.36,
+      "detected_object": "vehicle #96",
+      "vehicle_id": 96,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:32",
+      "frame_no": 434,
+      "relative_time_sec": 17.36,
+      "detected_object": "vehicle #100",
+      "vehicle_id": 100,
+      "confidence": 0.44,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:33",
+      "frame_no": 439,
+      "relative_time_sec": 17.56,
+      "detected_object": "vehicle #89",
+      "vehicle_id": 89,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:34",
+      "frame_no": 442,
+      "relative_time_sec": 17.68,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.38,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:34",
+      "frame_no": 443,
+      "relative_time_sec": 17.72,
+      "detected_object": "vehicle #89",
+      "vehicle_id": 89,
+      "confidence": 0.65,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:34",
+      "frame_no": 447,
+      "relative_time_sec": 17.88,
+      "detected_object": "vehicle #58",
+      "vehicle_id": 58,
+      "confidence": 0.56,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:34",
+      "frame_no": 447,
+      "relative_time_sec": 17.88,
+      "detected_object": "motorcycle #96 & car #61",
+      "vehicle_id": 96,
+      "confidence": 0.82,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 96
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 61
+        },
+        "iou": 0.134,
+        "distance": 102.0,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 96
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 61
+      },
+      "iou": 0.134,
+      "distance": 102.0,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:34",
+      "frame_no": 447,
+      "relative_time_sec": 17.88,
+      "detected_object": "bus #39 & truck #50",
+      "vehicle_id": 39,
+      "confidence": 0.48,
+      "details": {
+        "vehicle_1": {
+          "class": "bus",
+          "track_id": 39
+        },
+        "vehicle_2": {
+          "class": "truck",
+          "track_id": 50
+        },
+        "iou": 0.139,
+        "distance": 50.5,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "bus",
+        "track_id": 39
+      },
+      "vehicle_2": {
+        "class": "truck",
+        "track_id": 50
+      },
+      "iou": 0.139,
+      "distance": 50.5,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:34",
+      "frame_no": 449,
+      "relative_time_sec": 17.96,
+      "detected_object": "vehicle #50",
+      "vehicle_id": 50,
+      "confidence": 0.36,
+      "details": {
+        "stopped_duration_sec": 6.8,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 6.8,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:35",
+      "frame_no": 456,
+      "relative_time_sec": 18.24,
+      "detected_object": "vehicle #39",
+      "vehicle_id": 39,
+      "confidence": 0.42,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:37",
+      "frame_no": 470,
+      "relative_time_sec": 18.8,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.88,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:37",
+      "frame_no": 470,
+      "relative_time_sec": 18.8,
+      "detected_object": "vehicle #106",
+      "vehicle_id": 106,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:37",
+      "frame_no": 478,
+      "relative_time_sec": 19.12,
+      "detected_object": "vehicle #89",
+      "vehicle_id": 89,
+      "confidence": 0.39,
+      "details": {
+        "stopped_duration_sec": 2.6,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 2.6,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:38",
+      "frame_no": 480,
+      "relative_time_sec": 19.2,
+      "detected_object": "car #61 & motorcycle #96",
+      "vehicle_id": 61,
+      "confidence": 0.89,
+      "details": {
+        "vehicle_1": {
+          "class": "car",
+          "track_id": 61
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 96
+        },
+        "iou": 0.155,
+        "distance": 116.8,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "car",
+        "track_id": 61
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 96
+      },
+      "iou": 0.155,
+      "distance": 116.8,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:38",
+      "frame_no": 482,
+      "relative_time_sec": 19.28,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.86,
+      "details": {
+        "stopped_duration_sec": 5.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 5.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:38",
+      "frame_no": 483,
+      "relative_time_sec": 19.32,
+      "detected_object": "vehicle #58",
+      "vehicle_id": 58,
+      "confidence": 0.57,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:38",
+      "frame_no": 484,
+      "relative_time_sec": 19.36,
+      "detected_object": "vehicle #58",
+      "vehicle_id": 58,
+      "confidence": 0.42,
+      "details": {
+        "stopped_duration_sec": 6.4,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 6.4,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:38",
+      "frame_no": 489,
+      "relative_time_sec": 19.56,
+      "detected_object": "vehicle #96",
+      "vehicle_id": 96,
+      "confidence": 0.7,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:39",
+      "frame_no": 492,
+      "relative_time_sec": 19.68,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.43,
+      "details": {
+        "stopped_duration_sec": 3.0,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 3.0,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:39",
+      "frame_no": 492,
+      "relative_time_sec": 19.68,
+      "detected_object": "vehicle #111",
+      "vehicle_id": 111,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:39",
+      "frame_no": 494,
+      "relative_time_sec": 19.76,
+      "detected_object": "vehicle #96",
+      "vehicle_id": 96,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:39",
+      "frame_no": 496,
+      "relative_time_sec": 19.84,
+      "detected_object": "vehicle #110",
+      "vehicle_id": 110,
+      "confidence": 0.8,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:39",
+      "frame_no": 498,
+      "relative_time_sec": 19.92,
+      "detected_object": "vehicle #110",
+      "vehicle_id": 110,
+      "confidence": 0.37,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:40",
+      "frame_no": 499,
+      "relative_time_sec": 19.96,
+      "detected_object": "vehicle #96",
+      "vehicle_id": 96,
+      "confidence": 0.74,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:40",
+      "frame_no": 501,
+      "relative_time_sec": 20.04,
+      "detected_object": "vehicle #39",
+      "vehicle_id": 39,
+      "confidence": 0.48,
+      "details": {
+        "stopped_duration_sec": 6.1,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 6.1,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:40",
+      "frame_no": 501,
+      "relative_time_sec": 20.04,
+      "detected_object": "vehicle #89",
+      "vehicle_id": 89,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:40",
+      "frame_no": 506,
+      "relative_time_sec": 20.24,
+      "detected_object": "motorcycle #111 & bus #39",
+      "vehicle_id": 111,
+      "confidence": 0.49,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 111
+        },
+        "vehicle_2": {
+          "class": "bus",
+          "track_id": 39
+        },
+        "iou": 0.069,
+        "distance": 57.1,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 111
+      },
+      "vehicle_2": {
+        "class": "bus",
+        "track_id": 39
+      },
+      "iou": 0.069,
+      "distance": 57.1,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:41",
+      "frame_no": 511,
+      "relative_time_sec": 20.44,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.35,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:41",
+      "frame_no": 516,
+      "relative_time_sec": 20.64,
+      "detected_object": "vehicle #102",
+      "vehicle_id": 102,
+      "confidence": 0.45,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:41",
+      "frame_no": 516,
+      "relative_time_sec": 20.64,
+      "detected_object": "motorcycle #102 & motorcycle #96",
+      "vehicle_id": 102,
+      "confidence": 0.45,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 102
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 96
+        },
+        "iou": 0.561,
+        "distance": 26.8,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 102
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 96
+      },
+      "iou": 0.561,
+      "distance": 26.8,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:42",
+      "frame_no": 517,
+      "relative_time_sec": 20.68,
+      "detected_object": "vehicle #111",
+      "vehicle_id": 111,
+      "confidence": 0.43,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:42",
+      "frame_no": 518,
+      "relative_time_sec": 20.72,
+      "detected_object": "motorcycle #96 & car #45",
+      "vehicle_id": 96,
+      "confidence": 0.4,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 96
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 45
+        },
+        "iou": 0.044,
+        "distance": 110.2,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 96
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 45
+      },
+      "iou": 0.044,
+      "distance": 110.2,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:42",
+      "frame_no": 520,
+      "relative_time_sec": 20.8,
+      "detected_object": "vehicle #102",
+      "vehicle_id": 102,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:42",
+      "frame_no": 520,
+      "relative_time_sec": 20.8,
+      "detected_object": "car #45 & motorcycle #96",
+      "vehicle_id": 45,
+      "confidence": 0.47,
+      "details": {
+        "vehicle_1": {
+          "class": "car",
+          "track_id": 45
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 96
+        },
+        "iou": 0.05,
+        "distance": 110.1,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "car",
+        "track_id": 45
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 96
+      },
+      "iou": 0.05,
+      "distance": 110.1,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:42",
+      "frame_no": 524,
+      "relative_time_sec": 20.96,
+      "detected_object": "vehicle #119",
+      "vehicle_id": 119,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:42",
+      "frame_no": 526,
+      "relative_time_sec": 21.04,
+      "detected_object": "vehicle #111",
+      "vehicle_id": 111,
+      "confidence": 0.61,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:43",
+      "frame_no": 530,
+      "relative_time_sec": 21.2,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.85,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:43",
+      "frame_no": 531,
+      "relative_time_sec": 21.24,
+      "detected_object": "vehicle #102",
+      "vehicle_id": 102,
+      "confidence": 0.62,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:43",
+      "frame_no": 532,
+      "relative_time_sec": 21.28,
+      "detected_object": "vehicle #121",
+      "vehicle_id": 121,
+      "confidence": 0.81,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:44",
+      "frame_no": 533,
+      "relative_time_sec": 21.32,
+      "detected_object": "vehicle #89",
+      "vehicle_id": 89,
+      "confidence": 0.42,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:44",
+      "frame_no": 536,
+      "relative_time_sec": 21.44,
+      "detected_object": "vehicle #111",
+      "vehicle_id": 111,
+      "confidence": 0.47,
+      "details": {
+        "stopped_duration_sec": 1.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 1.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:44",
+      "frame_no": 536,
+      "relative_time_sec": 21.44,
+      "detected_object": "vehicle #123",
+      "vehicle_id": 123,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:44",
+      "frame_no": 538,
+      "relative_time_sec": 21.52,
+      "detected_object": "vehicle #121",
+      "vehicle_id": 121,
+      "confidence": 0.43,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:45",
+      "frame_no": 542,
+      "relative_time_sec": 21.68,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.9,
+      "details": {
+        "stopped_duration_sec": 5.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 5.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:45",
+      "frame_no": 542,
+      "relative_time_sec": 21.68,
+      "detected_object": "vehicle #121",
+      "vehicle_id": 121,
+      "confidence": 0.36,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:45",
+      "frame_no": 542,
+      "relative_time_sec": 21.68,
+      "detected_object": "car #61 & bus #45",
+      "vehicle_id": 61,
+      "confidence": 0.9,
+      "details": {
+        "vehicle_1": {
+          "class": "car",
+          "track_id": 61
+        },
+        "vehicle_2": {
+          "class": "bus",
+          "track_id": 45
+        },
+        "iou": 0.095,
+        "distance": 117.7,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "car",
+        "track_id": 61
+      },
+      "vehicle_2": {
+        "class": "bus",
+        "track_id": 45
+      },
+      "iou": 0.095,
+      "distance": 117.7,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:45",
+      "frame_no": 546,
+      "relative_time_sec": 21.84,
+      "detected_object": "vehicle #125",
+      "vehicle_id": 125,
+      "confidence": 0.32,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:46",
+      "frame_no": 551,
+      "relative_time_sec": 22.04,
+      "detected_object": "vehicle #124",
+      "vehicle_id": 124,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:46",
+      "frame_no": 551,
+      "relative_time_sec": 22.04,
+      "detected_object": "vehicle #89",
+      "vehicle_id": 89,
+      "confidence": 0.44,
+      "details": {
+        "stopped_duration_sec": 3.0,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 3.0,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:46",
+      "frame_no": 552,
+      "relative_time_sec": 22.08,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.44,
+      "details": {
+        "stopped_duration_sec": 2.8,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 2.8,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:47",
+      "frame_no": 552,
+      "relative_time_sec": 22.08,
+      "detected_object": "vehicle #125",
+      "vehicle_id": 125,
+      "confidence": 0.4,
+      "details": {
+        "person_count": 5
+      },
+      "person_count": 5
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:47",
+      "frame_no": 552,
+      "relative_time_sec": 22.08,
+      "detected_object": "vehicle #130",
+      "vehicle_id": 130,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:47",
+      "frame_no": 554,
+      "relative_time_sec": 22.16,
+      "detected_object": "vehicle #125",
+      "vehicle_id": 125,
+      "confidence": 0.5,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:48",
+      "frame_no": 559,
+      "relative_time_sec": 22.36,
+      "detected_object": "vehicle #124",
+      "vehicle_id": 124,
+      "confidence": 0.52,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:49",
+      "frame_no": 563,
+      "relative_time_sec": 22.52,
+      "detected_object": "vehicle #133",
+      "vehicle_id": 133,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:50",
+      "frame_no": 568,
+      "relative_time_sec": 22.72,
+      "detected_object": "vehicle #136",
+      "vehicle_id": 136,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:51",
+      "frame_no": 572,
+      "relative_time_sec": 22.88,
+      "detected_object": "vehicle #124",
+      "vehicle_id": 124,
+      "confidence": 0.5,
+      "details": {
+        "person_count": 4
+      },
+      "person_count": 4
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:51",
+      "frame_no": 575,
+      "relative_time_sec": 23.0,
+      "detected_object": "motorcycle #136 & motorcycle #125",
+      "vehicle_id": 136,
+      "confidence": 0.57,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 136
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 125
+        },
+        "iou": 0.692,
+        "distance": 12.9,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 136
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 125
+      },
+      "iou": 0.692,
+      "distance": 12.9,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:52",
+      "frame_no": 577,
+      "relative_time_sec": 23.08,
+      "detected_object": "vehicle #133",
+      "vehicle_id": 133,
+      "confidence": 0.36,
+      "details": {
+        "person_count": 4
+      },
+      "person_count": 4
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:52",
+      "frame_no": 577,
+      "relative_time_sec": 23.08,
+      "detected_object": "motorcycle #102 & motorcycle #133",
+      "vehicle_id": 102,
+      "confidence": 0.44,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 102
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 133
+        },
+        "iou": 0.594,
+        "distance": 8.7,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 102
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 133
+      },
+      "iou": 0.594,
+      "distance": 8.7,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:52",
+      "frame_no": 578,
+      "relative_time_sec": 23.12,
+      "detected_object": "vehicle #136",
+      "vehicle_id": 136,
+      "confidence": 0.39,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:52",
+      "frame_no": 580,
+      "relative_time_sec": 23.2,
+      "detected_object": "vehicle #102",
+      "vehicle_id": 102,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:53",
+      "frame_no": 590,
+      "relative_time_sec": 23.6,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.82,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:54",
+      "frame_no": 592,
+      "relative_time_sec": 23.68,
+      "detected_object": "vehicle #121",
+      "vehicle_id": 121,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:05:55",
+      "frame_no": 600,
+      "relative_time_sec": 24.0,
+      "detected_object": "vehicle #136",
+      "vehicle_id": 136,
+      "confidence": 0.46,
+      "details": {
+        "person_count": 4
+      },
+      "person_count": 4
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:55",
+      "frame_no": 602,
+      "relative_time_sec": 24.08,
+      "detected_object": "vehicle #61",
+      "vehicle_id": 61,
+      "confidence": 0.75,
+      "details": {
+        "stopped_duration_sec": 6.0,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 6.0,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:05:55",
+      "frame_no": 602,
+      "relative_time_sec": 24.08,
+      "detected_object": "car #61 & car #45",
+      "vehicle_id": 61,
+      "confidence": 0.75,
+      "details": {
+        "vehicle_1": {
+          "class": "car",
+          "track_id": 61
+        },
+        "vehicle_2": {
+          "class": "car",
+          "track_id": 45
+        },
+        "iou": 0.122,
+        "distance": 97.1,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "car",
+        "track_id": 61
+      },
+      "vehicle_2": {
+        "class": "car",
+        "track_id": 45
+      },
+      "iou": 0.122,
+      "distance": 97.1,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:56",
+      "frame_no": 609,
+      "relative_time_sec": 24.36,
+      "detected_object": "vehicle #121",
+      "vehicle_id": 121,
+      "confidence": 0.44,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:05:56",
+      "frame_no": 612,
+      "relative_time_sec": 24.48,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.64,
+      "details": {
+        "stopped_duration_sec": 5.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 5.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:56",
+      "frame_no": 612,
+      "relative_time_sec": 24.48,
+      "detected_object": "vehicle #124",
+      "vehicle_id": 124,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:05:57",
+      "frame_no": 619,
+      "relative_time_sec": 24.76,
+      "detected_object": "vehicle #124",
+      "vehicle_id": 124,
+      "confidence": 0.56,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:57",
+      "frame_no": 622,
+      "relative_time_sec": 24.88,
+      "detected_object": "vehicle #145",
+      "vehicle_id": 145,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:57",
+      "frame_no": 626,
+      "relative_time_sec": 25.04,
+      "detected_object": "vehicle #149",
+      "vehicle_id": 149,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:57",
+      "frame_no": 626,
+      "relative_time_sec": 25.04,
+      "detected_object": "vehicle #150",
+      "vehicle_id": 150,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:58",
+      "frame_no": 629,
+      "relative_time_sec": 25.16,
+      "detected_object": "vehicle #136",
+      "vehicle_id": 136,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:59",
+      "frame_no": 642,
+      "relative_time_sec": 25.68,
+      "detected_object": "vehicle #153",
+      "vehicle_id": 153,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:05:59",
+      "frame_no": 647,
+      "relative_time_sec": 25.88,
+      "detected_object": "vehicle #152",
+      "vehicle_id": 152,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:06:00",
+      "frame_no": 650,
+      "relative_time_sec": 26.0,
+      "detected_object": "vehicle #155",
+      "vehicle_id": 155,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:06:00",
+      "frame_no": 658,
+      "relative_time_sec": 26.32,
+      "detected_object": "vehicle #157",
+      "vehicle_id": 157,
+      "confidence": 0.67,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:06:01",
+      "frame_no": 662,
+      "relative_time_sec": 26.48,
+      "detected_object": "vehicle #157",
+      "vehicle_id": 157,
+      "confidence": 0.66,
+      "details": {
+        "person_count": 3
+      },
+      "person_count": 3
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:06:01",
+      "frame_no": 664,
+      "relative_time_sec": 26.56,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "wrong_way_driving",
+      "event": "wrong_way_driving",
+      "timestamp": "2026-08-17T12:06:01",
+      "frame_no": 664,
+      "relative_time_sec": 26.56,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.52,
+      "details": {
+        "movement_direction": "LEFT",
+        "expected_direction": "RIGHT"
+      },
+      "movement_direction": "LEFT",
+      "expected_direction": "RIGHT"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:06:01",
+      "frame_no": 667,
+      "relative_time_sec": 26.68,
+      "detected_object": "motorcycle #157 & motorcycle #45",
+      "vehicle_id": 157,
+      "confidence": 0.52,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 157
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 45
+        },
+        "iou": 0.07,
+        "distance": 171.7,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 157
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 45
+      },
+      "iou": 0.07,
+      "distance": 171.7,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:06:01",
+      "frame_no": 670,
+      "relative_time_sec": 26.8,
+      "detected_object": "motorcycle #45 & motorcycle #157",
+      "vehicle_id": 45,
+      "confidence": 0.52,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 45
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 157
+        },
+        "iou": 0.064,
+        "distance": 174.2,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 45
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 157
+      },
+      "iou": 0.064,
+      "distance": 174.2,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:06:02",
+      "frame_no": 672,
+      "relative_time_sec": 26.88,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.52,
+      "details": {
+        "stopped_duration_sec": 6.8,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 6.8,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:06:04",
+      "frame_no": 697,
+      "relative_time_sec": 27.88,
+      "detected_object": "vehicle #157",
+      "vehicle_id": 157,
+      "confidence": 0.62,
+      "details": {
+        "stopped_duration_sec": 1.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 1.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:06:06",
+      "frame_no": 718,
+      "relative_time_sec": 28.72,
+      "detected_object": "vehicle #157",
+      "vehicle_id": 157,
+      "confidence": 0.73,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:06:07",
+      "frame_no": 722,
+      "relative_time_sec": 28.88,
+      "detected_object": "vehicle #157",
+      "vehicle_id": 157,
+      "confidence": 0.62,
+      "details": {
+        "person_count": 5
+      },
+      "person_count": 5
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:06:07",
+      "frame_no": 724,
+      "relative_time_sec": 28.96,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:06:08",
+      "frame_no": 727,
+      "relative_time_sec": 29.08,
+      "detected_object": "motorcycle #157 & motorcycle #45",
+      "vehicle_id": 157,
+      "confidence": 0.62,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 157
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 45
+        },
+        "iou": 0.062,
+        "distance": 177.1,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 157
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 45
+      },
+      "iou": 0.062,
+      "distance": 177.1,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:06:08",
+      "frame_no": 732,
+      "relative_time_sec": 29.28,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.56,
+      "details": {
+        "stopped_duration_sec": 9.2,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 9.2,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:06:11",
+      "frame_no": 757,
+      "relative_time_sec": 30.28,
+      "detected_object": "vehicle #157",
+      "vehicle_id": 157,
+      "confidence": 0.62,
+      "details": {
+        "stopped_duration_sec": 3.6,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 3.6,
+      "status": "Vehicle Stopped / Possible Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:06:13",
+      "frame_no": 778,
+      "relative_time_sec": 31.12,
+      "detected_object": "vehicle #157",
+      "vehicle_id": 157,
+      "confidence": 0.67,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "triple_riding",
+      "event": "triple_riding",
+      "timestamp": "2026-08-17T12:06:13",
+      "frame_no": 782,
+      "relative_time_sec": 31.28,
+      "detected_object": "vehicle #157",
+      "vehicle_id": 157,
+      "confidence": 0.54,
+      "details": {
+        "person_count": 4
+      },
+      "person_count": 4
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "helmet_violation",
+      "event": "helmet_violation",
+      "timestamp": "2026-08-17T12:06:14",
+      "frame_no": 784,
+      "relative_time_sec": 31.36,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.7,
+      "details": {
+        "helmet_detected": false,
+        "status": "NO HELMET"
+      },
+      "helmet_detected": false,
+      "status": "NO HELMET"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "accident_collision",
+      "event": "accident_collision",
+      "timestamp": "2026-08-17T12:06:14",
+      "frame_no": 787,
+      "relative_time_sec": 31.48,
+      "detected_object": "motorcycle #157 & motorcycle #45",
+      "vehicle_id": 157,
+      "confidence": 0.54,
+      "details": {
+        "vehicle_1": {
+          "class": "motorcycle",
+          "track_id": 157
+        },
+        "vehicle_2": {
+          "class": "motorcycle",
+          "track_id": 45
+        },
+        "iou": 0.08,
+        "distance": 167.3,
+        "status": "Vehicle Collision / Accident"
+      },
+      "vehicle_1": {
+        "class": "motorcycle",
+        "track_id": 157
+      },
+      "vehicle_2": {
+        "class": "motorcycle",
+        "track_id": 45
+      },
+      "iou": 0.08,
+      "distance": 167.3,
+      "status": "Vehicle Collision / Accident"
+    },
+    {
+      "video_name": "input.mp4",
+      "video_id": "input.mp4",
+      "camera_id": "cam_input",
+      "event_type": "vehicle_stopped",
+      "event": "vehicle_stopped",
+      "timestamp": "2026-08-17T12:06:14",
+      "frame_no": 792,
+      "relative_time_sec": 31.68,
+      "detected_object": "vehicle #45",
+      "vehicle_id": 45,
+      "confidence": 0.35,
+      "details": {
+        "stopped_duration_sec": 11.5,
+        "status": "Vehicle Stopped / Possible Accident"
+      },
+      "stopped_duration_sec": 11.5,
+      "status": "Vehicle Stopped / Possible Accident"
+    }
+  ]
+}

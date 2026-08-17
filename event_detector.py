@@ -14,14 +14,16 @@ class EventDetector:
     Evaluates traffic video frames for safety & traffic violation events:
     1. Triple Riding / Triple Sit Detection (Primary Event)
     2. Wrong-Way Driving
-    3. Accident / Vehicle Stopped
-    4. Helmet Violation (Modular prototype)
+    3. Multi-Vehicle Collision & Accident Detection
+    4. Vehicle Stopped / Road Hazard
+    5. Helmet Violation (Modular AI Model)
     """
 
-    def __init__(self, detector, tracker, camera_id: str = config.CAMERA_ID):
+    def __init__(self, detector, tracker, camera_id: str = config.CAMERA_ID, video_name: str = "input.mp4"):
         self.detector = detector
         self.tracker = tracker
         self.camera_id = camera_id
+        self.video_name = video_name
 
         # Events log
         self.events = []
@@ -34,12 +36,15 @@ class EventDetector:
         self.stopped_consecutive = defaultdict(int)
         # track_id -> consecutive frames moving in wrong direction
         self.wrong_way_consecutive = defaultdict(int)
+        # pair_key -> consecutive frames in collision/proximity
+        self.collision_consecutive = defaultdict(int)
 
         # Cooldown management: event_key -> last_frame_triggered
         self.event_cooldowns = {}
 
         # Active frame alerts for visual overlay
         self.active_frame_alerts = []
+        self.last_frame_telemetry = {}
 
     def load_existing_events(self):
         """Loads historical events from data/events.json if present."""
@@ -64,7 +69,7 @@ class EventDetector:
         except Exception as e:
             print(f"[EventDetector] Error saving events: {e}")
 
-    def log_event(self, event_type: str, vehicle_id: int, confidence: float, details: dict, frame_no: int):
+    def log_event(self, event_type: str, vehicle_id: int, confidence: float, details: dict, frame_no: int, fps: float = 25.0, detected_object: str = None):
         """
         Logs a newly detected event, checking cooldown to prevent duplicate spam.
         """
@@ -75,20 +80,46 @@ class EventDetector:
             return None
 
         now_iso = datetime.datetime.now().isoformat(timespec="seconds")
+        obj_str = detected_object or f"vehicle #{vehicle_id}"
         event_record = {
+            "video_name": self.video_name,
+            "video_id": self.video_name,
             "camera_id": self.camera_id,
+            "event_type": event_type,
             "event": event_type,
-            "vehicle_id": int(vehicle_id),
-            "confidence": round(float(confidence), 2),
             "timestamp": now_iso,
+            "frame_no": int(frame_no),
+            "relative_time_sec": round(frame_no / max(1.0, fps), 2),
+            "detected_object": obj_str,
+            "vehicle_id": int(vehicle_id) if vehicle_id is not None else None,
+            "confidence": round(float(confidence), 2),
+            "details": details,
             **details
         }
 
         self.events.append(event_record)
         self.event_cooldowns[cooldown_key] = frame_no
         self.save_events()
-        print(f"[EVENT DETECTED] Frame {frame_no} -> {event_type} on Vehicle ID {vehicle_id}: {details}")
+        print(f"[EVENT DETECTED] [{self.video_name}] Frame {frame_no} -> {event_type} on {obj_str} ({event_record['confidence']}): {details}")
         return event_record
+
+    def _calculate_iou(self, box1: np.ndarray, box2: np.ndarray) -> float:
+        """Calculates Intersection over Union between two bounding boxes."""
+        x1 = max(box1[0], box2[0])
+        y1 = max(box1[1], box2[1])
+        x2 = min(box1[2], box2[2])
+        y2 = min(box1[3], box2[3])
+
+        inter_w = max(0, x2 - x1)
+        inter_h = max(0, y2 - y1)
+        inter_area = inter_w * inter_h
+        if inter_area <= 0:
+            return 0.0
+
+        area1 = max(0, box1[2] - box1[0]) * max(0, box1[3] - box1[1])
+        area2 = max(0, box2[2] - box2[0]) * max(0, box2[3] - box2[1])
+        union = area1 + area2 - inter_area
+        return float(inter_area / max(1.0, union))
 
     def _is_person_on_motorcycle(self, person_box: np.ndarray, bike_box: np.ndarray) -> bool:
         """
@@ -304,57 +335,173 @@ class EventDetector:
                 "box": box
             }
 
-        # 4. Render Annotations on Frame
+        # -------------------------------------------------------------
+        # EVENT 0: MULTI-VEHICLE COLLISION & ACCIDENT DETECTION
+        # -------------------------------------------------------------
+        for i in range(len(vehicle_indices)):
+            for j in range(i + 1, len(vehicle_indices)):
+                idx1 = vehicle_indices[i]
+                idx2 = vehicle_indices[j]
+                t1 = tracked.tracker_id[idx1]
+                t2 = tracked.tracker_id[idx2]
+                if t1 is None or t2 is None:
+                    continue
+                t1, t2 = int(t1), int(t2)
+                box1 = tracked.xyxy[idx1]
+                box2 = tracked.xyxy[idx2]
+
+                c1 = np.array([(box1[0] + box1[2]) / 2.0, (box1[1] + box1[3]) / 2.0])
+                c2 = np.array([(box2[0] + box2[2]) / 2.0, (box2[1] + box2[3]) / 2.0])
+                dist = float(np.linalg.norm(c1 - c2))
+                iou = self._calculate_iou(box1, box2)
+
+                pair_key = tuple(sorted([t1, t2]))
+                # Check collision condition (physical bounding box overlap or close collision proximity)
+                if iou >= 0.03 or dist < 35.0:
+                    self.collision_consecutive[pair_key] += 1
+                    if self.collision_consecutive[pair_key] >= 4:
+                        for tid in (t1, t2):
+                            if tid in vehicle_status:
+                                if "ACCIDENT / COLLISION" not in vehicle_status[tid]["tags"]:
+                                    vehicle_status[tid]["tags"].append("ACCIDENT / COLLISION")
+
+                        cls1 = int(tracked.class_id[idx1])
+                        cls2 = int(tracked.class_id[idx2])
+                        n1 = self.detector.get_class_name(cls1)
+                        n2 = self.detector.get_class_name(cls2)
+                        c1_conf = float(tracked.confidence[idx1]) if tracked.confidence is not None else 0.85
+                        c2_conf = float(tracked.confidence[idx2]) if tracked.confidence is not None else 0.85
+                        c_conf = max(c1_conf, c2_conf)
+
+                        ev = self.log_event(
+                            event_type="accident_collision",
+                            vehicle_id=t1,
+                            confidence=c_conf,
+                            details={
+                                "vehicle_1": {"class": n1, "track_id": t1},
+                                "vehicle_2": {"class": n2, "track_id": t2},
+                                "iou": round(iou, 3),
+                                "distance": round(dist, 1),
+                                "status": "Vehicle Collision / Accident"
+                            },
+                            frame_no=frame_no,
+                            fps=fps,
+                            detected_object=f"{n1} #{t1} & {n2} #{t2}"
+                        )
+                        if ev:
+                            new_events.append(ev)
+                            self.active_frame_alerts.append(f"CRITICAL ACCIDENT: Collision between {n1.upper()} #{t1} & {n2.upper()} #{t2}")
+                else:
+                    self.collision_consecutive[pair_key] = max(0, self.collision_consecutive[pair_key] - 1)
+
+        # 4. Compile frame-level detection telemetry and counts
+        frame_detections_list = []
+        counts = {
+            "total": len(tracked),
+            "person": 0,
+            "car": 0,
+            "bus": 0,
+            "truck": 0,
+            "motorcycle": 0
+        }
+
+        for i in range(len(tracked)):
+            cls_id = int(tracked.class_id[i])
+            cname = self.detector.get_class_name(cls_id).lower()
+            conf_val = float(tracked.confidence[i]) if tracked.confidence is not None else 0.85
+            t_id = int(tracked.tracker_id[i]) if (tracked.tracker_id is not None and tracked.tracker_id[i] is not None) else None
+            bx = [int(v) for v in tracked.xyxy[i]]
+
+            if cname in counts:
+                counts[cname] += 1
+            else:
+                counts["total"] += 1
+
+            frame_detections_list.append({
+                "class_name": cname,
+                "confidence": round(conf_val, 2),
+                "confidence_pct": f"{int(round(conf_val * 100))}%",
+                "box": bx,
+                "track_id": t_id,
+                "tags": vehicle_status.get(t_id, {}).get("tags", []) if t_id is not None else []
+            })
+
+        self.last_frame_telemetry = {
+            "frame_no": frame_no,
+            "counts": counts,
+            "detections": frame_detections_list,
+            "active_alerts": list(self.active_frame_alerts),
+            "new_events": new_events
+        }
+
+        # 5. Render Annotations on Frame
         annotated_frame = self.render_overlay(frame, tracked, vehicle_status, frame_no)
 
         return annotated_frame, self.active_frame_alerts, new_events
 
     def render_overlay(self, frame: np.ndarray, tracked: sv.Detections, vehicle_status: dict, frame_no: int) -> np.ndarray:
         """
-        Draws bounding boxes, tracking IDs, speed/status tags, and top HUD banner.
+        Draws clear rectangular bounding boxes, class names + confidence scores (e.g. 'car 91%'),
+        tracking IDs, speed/status tags, and top HUD banner.
         """
         out_frame = frame.copy()
         h, w = out_frame.shape[:2]
 
-        # Draw tracked objects
+        # Draw detected and tracked objects
         for i in range(len(tracked)):
-            track_id = tracked.tracker_id[i]
-            if track_id is None:
-                continue
-
-            track_id = int(track_id)
+            track_id = tracked.tracker_id[i] if tracked.tracker_id is not None else None
+            t_id_int = int(track_id) if track_id is not None else None
             cls_id = int(tracked.class_id[i])
             x1, y1, x2, y2 = map(int, tracked.xyxy[i])
+            conf_val = float(tracked.confidence[i]) if tracked.confidence is not None else 0.85
+            conf_pct = f"{int(round(conf_val * 100))}%"
 
-            status_info = vehicle_status.get(track_id, {})
+            status_info = vehicle_status.get(t_id_int, {}) if t_id_int is not None else {}
             tags = status_info.get("tags", [])
-            class_name = self.detector.get_class_name(cls_id)
+            class_name = self.detector.get_class_name(cls_id).lower()
 
-            # Determine box color based on active violation
-            if "TRIPLE RIDING" in tags or "WRONG WAY" in tags:
+            # Determine box color based on active violation / class type
+            if "ACCIDENT / COLLISION" in tags:
+                color = (0, 0, 255)  # Bright Red
+                box_thickness = 3
+            elif "TRIPLE RIDING" in tags or "WRONG WAY" in tags:
                 color = (0, 0, 255)  # Bright Red
                 box_thickness = 3
             elif "STOPPED / ACCIDENT" in tags:
                 color = (0, 140, 255)  # Orange
                 box_thickness = 3
             elif "NO HELMET" in tags:
-                color = (0, 200, 255)  # Yellow
+                color = (0, 215, 255)  # Yellow-Amber
                 box_thickness = 2
             elif cls_id == config.CLASS_PERSON:
-                color = (255, 200, 0)  # Cyan/Blue for pedestrians
-                box_thickness = 1
+                color = (255, 190, 0)  # Cyan/Sky Blue for pedestrians
+                box_thickness = 2
+            elif cls_id == config.CLASS_MOTORCYCLE:
+                color = (0, 230, 255)  # Amber Yellow for motorcycle
+                box_thickness = 2
+            elif cls_id == config.CLASS_BUS:
+                color = (255, 120, 220)  # Magenta for bus
+                box_thickness = 2
+            elif cls_id == config.CLASS_TRUCK:
+                color = (0, 165, 255)  # Orange for truck
+                box_thickness = 2
             else:
-                color = (0, 255, 128)  # Bright Green for normal vehicles
+                color = (0, 255, 128)  # Bright Emerald Green for cars/vehicles
                 box_thickness = 2
 
+            # 1. Clear rectangular bounding box
             cv2.rectangle(out_frame, (x1, y1), (x2, y2), color, box_thickness)
 
-            # Build label text
-            label = f"{class_name.upper()} #{track_id}"
+            # 2. Build label text: e.g. "car 91%" or "person 95% #1"
+            if t_id_int is not None:
+                label = f"{class_name} #{t_id_int} {conf_pct}"
+            else:
+                label = f"{class_name} {conf_pct}"
+
             if tags:
                 label += f" | {' + '.join(tags)}"
 
-            # Draw label banner background
+            # 3. Draw label banner background for high legibility
             font = cv2.FONT_HERSHEY_SIMPLEX
             font_scale = 0.52
             font_thickness = 1
@@ -362,12 +509,14 @@ class EventDetector:
             label_y1 = max(0, y1 - th - 8)
             label_y2 = y1
 
+            # Background label pill
             cv2.rectangle(out_frame, (x1, label_y1), (x1 + tw + 8, label_y2), color, -1)
-            cv2.putText(out_frame, label, (x1 + 4, label_y2 - 4), font, font_scale, (0, 0, 0), font_thickness, cv2.LINE_AA)
+            # Crisp dark text on colored background
+            cv2.putText(out_frame, label, (x1 + 4, label_y2 - 4), font, font_scale, (10, 10, 15), font_thickness, cv2.LINE_AA)
 
-            # Draw trajectory trail for vehicles
-            if cls_id in config.VEHICLE_CLASS_IDS:
-                pts = self.tracker.get_trajectory(track_id)
+            # Draw trajectory trail for tracked vehicles
+            if t_id_int is not None and cls_id in config.VEHICLE_CLASS_IDS:
+                pts = self.tracker.get_trajectory(t_id_int)
                 if len(pts) > 1:
                     for j in range(1, len(pts)):
                         pt1 = (int(pts[j-1][0]), int(pts[j-1][1]))
@@ -381,7 +530,7 @@ class EventDetector:
 
         # HUD Text info
         cv2.putText(out_frame, "CITYEYE CCTV ANALYTICS", (20, 26), cv2.FONT_HERSHEY_DUPLEX, 0.7, (0, 240, 255), 2, cv2.LINE_AA)
-        status_line = f"CAM: {self.camera_id} | FLOW: {config.EXPECTED_DIRECTION} | FRAME: {frame_no} | EVENTS: {len(self.events)}"
+        status_line = f"CAM: {self.camera_id} | VIDEO: {self.video_name} | FRAME: {frame_no} | EVENTS: {len(self.events)}"
         cv2.putText(out_frame, status_line, (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.48, (200, 200, 200), 1, cv2.LINE_AA)
 
         # Modular Helmet Status Badge
@@ -639,10 +788,10 @@ class EventDetector:
         text_color = (0, 0, 0) if (color[0] + color[1] + color[2]) > 350 else (255, 255, 255)
         cv2.putText(img, text, (x1 + 4, label_y2 - 4), font, font_scale, text_color, font_thickness, cv2.LINE_AA)
 
-    def process_video(self, video_path: str = config.VIDEO_PATH, output_path: str = config.OUTPUT_PATH) -> dict:
+    def process_video(self, video_path: str = config.VIDEO_PATH, output_path: str = config.OUTPUT_PATH, conf: float = None, imgsz: int = 640) -> dict:
         """
         Processes a full MP4 video with ByteTrack multi-object tracking.
-        Detects wrong-way driving, stopped vehicle/accident, and triple riding.
+        Detects collisions/accidents, wrong-way driving, stopped vehicle, helmet violation, and triple riding.
         Writes annotated video to output_path and logs events to data/events.json.
         """
         import time
@@ -654,10 +803,16 @@ class EventDetector:
                 "status": "error",
                 "message": msg,
                 "input_path": video_path,
-                "total_frames_processed": 0,
-                "events_count": 0
+                "video_name": os.path.basename(video_path),
+                "total_detections": 0,
+                "total_events": 0,
+                "no_helmet_events": 0,
+                "accident_events": 0,
+                "other_events": 0,
+                "events": []
             }
 
+        self.video_name = os.path.basename(video_path)
         cap = cv2.VideoCapture(video_path)
         if not cap.isOpened():
             msg = f"[CityEye Video] Failed to open video file '{video_path}'."
@@ -666,8 +821,13 @@ class EventDetector:
                 "status": "error",
                 "message": msg,
                 "input_path": video_path,
-                "total_frames_processed": 0,
-                "events_count": 0
+                "video_name": self.video_name,
+                "total_detections": 0,
+                "total_events": 0,
+                "no_helmet_events": 0,
+                "accident_events": 0,
+                "other_events": 0,
+                "events": []
             }
 
         total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -683,12 +843,14 @@ class EventDetector:
         writer = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
 
         print(f"\n[CityEye Video] Processing video: {video_path}")
+        print(f"  - Video Name: {self.video_name}")
         print(f"  - Resolution: {width}x{height} @ {fps:.1f} FPS ({total_frames} frames)")
         print(f"  - Output:     {output_path}")
 
         frame_no = 0
         start_time = time.time()
-        new_events_total = 0
+        total_detections_count = 0
+        run_events = []
 
         try:
             while True:
@@ -697,35 +859,66 @@ class EventDetector:
                     break
 
                 frame_no += 1
-                annotated_frame, alerts, frame_events = self.process_frame(frame, frame_no, fps)
+                # Run YOLO detection & tracking
+                dets = self.detector.detect(frame, conf=conf, imgsz=imgsz)
+                total_detections_count += len(dets)
+                tracked = self.tracker.update(dets)
+
+                annotated_frame, alerts, frame_events = self.process_frame(
+                    frame=frame,
+                    frame_no=frame_no,
+                    fps=fps,
+                    tracked_detections=tracked
+                )
                 writer.write(annotated_frame)
-                new_events_total += len(frame_events)
+                if frame_events:
+                    run_events.extend(frame_events)
 
                 if frame_no % 30 == 0 or frame_no == total_frames:
                     pct = int((frame_no / max(1, total_frames)) * 100) if total_frames > 0 else 0
-                    print(f"  [Frame {frame_no}/{total_frames}] {pct}% | Active Events: {len(self.events)}")
+                    print(f"  [Frame {frame_no}/{total_frames}] {pct}% | Detections: {total_detections_count} | Active Events: {len(run_events)}")
         finally:
             cap.release()
             writer.release()
 
         elapsed = round(time.time() - start_time, 2)
-        stats = self.get_summary_statistics()
+        fps_speed = round(frame_no / max(0.001, elapsed), 1)
 
-        print(f"\n[CityEye Video] Video Processing Complete:")
-        print(f"  - Total Frames:   {frame_no}")
-        print(f"  - Elapsed Time:   {elapsed}s")
-        print(f"  - Total Events:   {len(self.events)}")
-        print(f"  - Output Video:   {output_path}\n")
+        # Categorize run events
+        no_helmet_count = sum(1 for e in run_events if e.get("event") in ("helmet_violation", "no_helmet"))
+        accident_count = sum(1 for e in run_events if e.get("event") in ("accident_collision", "possible_accident"))
+        triple_count = sum(1 for e in run_events if e.get("event") == "triple_riding")
+        wrong_way_count = sum(1 for e in run_events if e.get("event") == "wrong_way_driving")
+        stopped_count = sum(1 for e in run_events if e.get("event") == "vehicle_stopped")
+        other_events_count = triple_count + wrong_way_count + stopped_count
+
+        print(f"\n[CityEye Video] Video Processing Complete ({self.video_name}):")
+        print(f"  - Total Frames:     {frame_no} ({fps_speed} FPS)")
+        print(f"  - Elapsed Time:     {elapsed}s")
+        print(f"  - Total Detections: {total_detections_count}")
+        print(f"  - Total Events:     {len(run_events)}")
+        print(f"  - NO HELMET:        {no_helmet_count}")
+        print(f"  - Accident:         {accident_count}")
+        print(f"  - Other Events:     {other_events_count}")
+        print(f"  - Output Video:     {output_path}\n")
 
         return {
             "status": "success",
-            "message": f"Successfully processed {frame_no} frames in {elapsed}s",
+            "video_name": self.video_name,
             "input_path": video_path,
             "output_path": output_path,
             "total_frames_processed": frame_no,
             "elapsed_seconds": elapsed,
-            "statistics": stats,
-            "events_count": len(self.events)
+            "processing_fps": fps_speed,
+            "total_detections": total_detections_count,
+            "total_events": len(run_events),
+            "no_helmet_events": no_helmet_count,
+            "accident_events": accident_count,
+            "triple_riding_events": triple_count,
+            "wrong_way_events": wrong_way_count,
+            "vehicle_stopped_events": stopped_count,
+            "other_events": other_events_count,
+            "events": run_events
         }
 
     def get_summary_statistics(self) -> dict:
@@ -738,6 +931,7 @@ class EventDetector:
             "wrong_way_driving": 0,
             "vehicle_stopped": 0,
             "helmet_violation": 0,
+            "accident_collision": 0,
             "total_vehicles": len(self.tracker.all_seen_vehicles) if self.tracker else 0,
             "total_persons": len(self.tracker.all_seen_persons) if self.tracker else 0
         }
