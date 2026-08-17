@@ -471,11 +471,13 @@ body.dark-theme {
   box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
 }
 
+.cctv-stream-element,
 .cctv-video-element {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: fill;
   display: block;
+  margin: 0 auto;
 }
 
 .video-placeholder-overlay {
@@ -990,27 +992,43 @@ body.dark-theme {
   display: none;
 }
 
-/* Fullscreen Mode Styling */
-.video-display-frame:fullscreen {
+/* Fullscreen Mode Styling (Edge-to-Edge, No Blank Black Gaps) */
+.video-display-frame:fullscreen,
+.video-display-frame:-webkit-full-screen,
+.video-display-frame:-moz-full-screen,
+.video-display-frame:-ms-fullscreen {
   width: 100vw !important;
   height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
   aspect-ratio: auto !important;
   border-radius: 0 !important;
   border: none !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
   background: #000 !important;
+  overflow: hidden !important;
 }
 
 .video-display-frame:fullscreen .cctv-stream-element,
-.video-display-frame:fullscreen .cctv-video-element {
-  max-width: 100vw;
-  max-height: 100vh;
-  object-fit: contain;
+.video-display-frame:fullscreen .cctv-video-element,
+.video-display-frame:-webkit-full-screen .cctv-stream-element,
+.video-display-frame:-webkit-full-screen .cctv-video-element {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  object-fit: fill !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
 }
 
-.video-display-frame:fullscreen .video-player-controls {
-  bottom: 24px;
-  right: 24px;
+.video-display-frame:fullscreen .video-player-controls,
+.video-display-frame:-webkit-full-screen .video-player-controls {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 99999 !important;
 }
